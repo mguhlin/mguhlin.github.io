@@ -1,0 +1,10 @@
+{
+  "name": "mguhlin-creations-directory",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "python3 scripts/build.py",
+    "test": "playwright test"
+  },
+  "devDependencies": { "@playwright/test": "1.60.0" }
+}

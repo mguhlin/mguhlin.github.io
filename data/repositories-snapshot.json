@@ -1,0 +1,216 @@
+{
+  "checked": "2026-09-29",
+  "source": "https://api.github.com/users/mguhlin/repos?per_page=100",
+  "repositories": [
+    {
+      "archived": false,
+      "default_branch": "main",
+      "description": "DrawSplat is an interactive whiteboard solution that supports multiple languages, offers a variety of features and is intended for K-16 education or productivity enhancement.",
+      "fork": false,
+      "has_pages": true,
+      "homepage": null,
+      "name": "drawsplat",
+      "pushed_at": "2026-09-29T18:11:37Z"
+    },
+    {
+      "archived": false,
+      "default_branch": "main",
+      "description": "Contraband \u2014 banned/challenged-book learning rooms. \u00a9 Miguel Guhlin, CC BY-NC 4.0.",
+      "fork": false,
+      "has_pages": true,
+      "homepage": null,
+      "name": "contraband",
+      "pushed_at": "2026-09-29T09:40:38Z"
+    },
+    {
+      "archived": false,
+      "default_branch": "main",
+      "description": "Miguel Guhlin\u2019s NSPA conference materials, AI guides, assessments, and scholarship resources",
+      "fork": false,
+      "has_pages": true,
+      "homepage": null,
+      "name": "nspa",
+      "pushed_at": "2026-09-25T17:42:49Z"
+    },
+    {
+      "archived": true,
+      "default_branch": "main",
+      "description": "NSPA AI Fluency Self-Assessment",
+      "fork": false,
+      "has_pages": true,
+      "homepage": null,
+      "name": "nspaaifluency",
+      "pushed_at": "2026-09-24T15:06:48Z"
+    },
+    {
+      "archived": true,
+      "default_branch": "main",
+      "description": "Automating Office Tasks with AI",
+      "fork": false,
+      "has_pages": true,
+      "homepage": null,
+      "name": "nspa3",
+      "pushed_at": "2026-09-24T15:06:45Z"
+    },
+    {
+      "archived": false,
+      "default_branch": "main",
+      "description": "creations with Gen AI tools",
+      "fork": false,
+      "has_pages": true,
+      "homepage": null,
+      "name": "creations",
+      "pushed_at": "2026-09-24T15:05:10Z"
+    },
+    {
+      "archived": false,
+      "default_branch": "main",
+      "description": "Browser-first asteroid mining and colony-building game on a WebAssembly Luanti engine. Dig. Craft. Build. Prepare for Tomorrow.",
+      "fork": false,
+      "has_pages": true,
+      "homepage": null,
+      "name": "Prospect47",
+      "pushed_at": "2026-08-16T20:23:17Z"
+    },
+    {
+      "archived": false,
+      "default_branch": "main",
+      "description": "An interactive journey through the unfinished history of voting rights",
+      "fork": false,
+      "has_pages": true,
+      "homepage": null,
+      "name": "sojourn",
+      "pushed_at": "2026-08-11T15:41:43Z"
+    },
+    {
+      "archived": false,
+      "default_branch": "main",
+      "description": "An original browser-based LitRPG action dungeon crawler starring three sawmill foremen and Moxie the standard poodle.",
+      "fork": false,
+      "has_pages": true,
+      "homepage": null,
+      "name": "dungeonrun",
+      "pushed_at": "2026-08-05T01:40:33Z"
+    },
+    {
+      "archived": false,
+      "default_branch": "main",
+      "description": null,
+      "fork": false,
+      "has_pages": true,
+      "homepage": "https://mguhlin.github.io/gridsplat/",
+      "name": "gridsplat",
+      "pushed_at": "2026-06-07T22:47:38Z"
+    },
+    {
+      "archived": true,
+      "default_branch": "main",
+      "description": "Visible Learning",
+      "fork": false,
+      "has_pages": true,
+      "homepage": null,
+      "name": "vlet",
+      "pushed_at": "2026-03-22T02:13:41Z"
+    },
+    {
+      "archived": true,
+      "default_branch": "main",
+      "description": "AI Custom Instructions",
+      "fork": false,
+      "has_pages": true,
+      "homepage": null,
+      "name": "aici",
+      "pushed_at": "2026-03-22T02:10:09Z"
+    },
+    {
+      "archived": true,
+      "default_branch": "main",
+      "description": "A self-assessment for the AI Capability Ladder",
+      "fork": false,
+      "has_pages": true,
+      "homepage": null,
+      "name": "acl",
+      "pushed_at": "2026-03-22T02:06:30Z"
+    },
+    {
+      "archived": true,
+      "default_branch": "main",
+      "description": "AI Prompt Architect",
+      "fork": false,
+      "has_pages": true,
+      "homepage": null,
+      "name": "architect",
+      "pushed_at": "2026-03-22T02:17:54Z"
+    },
+    {
+      "archived": true,
+      "default_branch": "main",
+      "description": "Employee Onboarding Guide",
+      "fork": false,
+      "has_pages": true,
+      "homepage": null,
+      "name": "eog",
+      "pushed_at": "2026-03-22T02:23:55Z"
+    },
+    {
+      "archived": false,
+      "default_branch": "main",
+      "description": "Coaching for Every Learning with UDL",
+      "fork": false,
+      "has_pages": true,
+      "homepage": null,
+      "name": "cudl",
+      "pushed_at": "2026-03-22T02:13:00Z"
+    },
+    {
+      "archived": false,
+      "default_branch": "main",
+      "description": "Mockup of Claude generated website",
+      "fork": false,
+      "has_pages": true,
+      "homepage": null,
+      "name": "dev",
+      "pushed_at": "2026-03-18T03:58:05Z"
+    },
+    {
+      "archived": false,
+      "default_branch": "main",
+      "description": "Another Think Coming - mgblog.org",
+      "fork": false,
+      "has_pages": false,
+      "homepage": null,
+      "name": "mgblog",
+      "pushed_at": "2026-03-18T03:50:13Z"
+    },
+    {
+      "archived": false,
+      "default_branch": "main",
+      "description": "Fun, personality quiz (e.g. Pooh, Smurfs, Looney Tunes, etc.)",
+      "fork": false,
+      "has_pages": true,
+      "homepage": null,
+      "name": "funquiz",
+      "pushed_at": "2026-03-11T16:50:10Z"
+    },
+    {
+      "archived": false,
+      "default_branch": "main",
+      "description": "Navigating Difficult Coaching Conversations with Confidence Scenarios",
+      "fork": false,
+      "has_pages": true,
+      "homepage": null,
+      "name": "ndc",
+      "pushed_at": "2026-01-29T20:09:29Z"
+    },
+    {
+      "archived": false,
+      "default_branch": "main",
+      "description": "An Emotional Intelligence Self-Assessment",
+      "fork": false,
+      "has_pages": true,
+      "homepage": null,
+      "name": "eisa26",
+      "pushed_at": "2026-01-27T20:21:21Z"
+    }
+  ]
+}
