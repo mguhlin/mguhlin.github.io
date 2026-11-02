@@ -22,3 +22,7 @@ cookies, or service workers. The generated page is deployed by GitHub Pages from
 See [inventory notes](docs/inventory.md) and [image provenance](docs/images.md).
 Licenses for linked projects remain with those projects; this index does not
 relicense their content or artwork.
+
+## Postbox
+
+[Download Postbox for Windows or Linux](https://mguhlin.github.io/postbox/) — Miguel Guhlin’s portable offline email viewer for EML and MBOX exports, with search, attachment previews, and bulk organization. [README and source](postbox/README.md).

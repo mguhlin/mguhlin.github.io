@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Postbox — Your offline email archive, by Miguel Guhlin</title>
+<meta name="description" content="Download Postbox for Windows or Linux. Read and search EML and MBOX email exports offline, preview attachments, organize by month, and export files. Python is included.">
+<meta name="theme-color" content="#123e30">
+<link rel="canonical" href="https://mguhlin.github.io/postbox/">
+<meta property="og:type" content="website"><meta property="og:title" content="Postbox — Your archive, close at hand">
+<meta property="og:description" content="A portable offline email viewer for Windows and Linux. Open EML and MBOX archives, search, preview, and organize. No Python installation needed.">
+<meta property="og:url" content="https://mguhlin.github.io/postbox/"><meta property="og:image" content="https://mguhlin.github.io/postbox/assets/hero.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="../assets/favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<a class="skip" href="#downloads">Skip to downloads</a>
+<header class="site-header wrap"><a class="brand" href="./"><span class="brand-icon" aria-hidden="true">✉</span> Postbox</a><nav aria-label="Main navigation"><a href="#downloads">Download</a><a href="#start">Get started</a><a href="https://github.com/mguhlin/mguhlin.github.io/tree/main/postbox#readme">README &amp; source ↗</a></nav></header>
+<main>
+<section class="hero wrap" aria-labelledby="title">
+<img src="assets/hero.png" alt="An envelope bursting with documents, photographs, and colorful splashes" width="1938" height="812" fetchpriority="high">
+<div class="hero-copy"><p class="eyebrow">LOCAL. OFFLINE. YOURS.</p><h1 id="title">Your archive.<br>Close at hand.</h1><p class="intro">Give your exported email a home. Read messages, find the file you need, and bring a little order to your archive.</p><a class="button gold" href="#downloads">Get Postbox <span aria-hidden="true">↓</span></a><p class="hero-note">Free to use · Windows &amp; Linux · Python included</p></div>
+</section>
+<section id="downloads" class="wrap section" aria-labelledby="downloads-title">
+<div class="section-heading"><p class="eyebrow">TAKE YOUR INBOX WITH YOU</p><h2 id="downloads-title">Download. Extract. Open.</h2><p>No installer, no account, and no Python setup. Keep the extracted folder together on your computer or USB drive.</p></div>
+<div class="download-grid">
+<article class="download-card"><p class="platform">WINDOWS</p><h3>A double-click away.</h3><p>For Windows 10 or later on Intel/AMD 64-bit computers.</p><a class="button gold download" href="downloads/Postbox-windows-x64.zip" download>Download for Windows <span aria-hidden="true">↓</span></a><p class="file-detail">ZIP · 12.2 MiB · Includes Python</p><ol><li>Extract the entire ZIP.</li><li>Double-click <strong>Start Postbox.bat</strong>.</li><li>Your browser opens the local viewer.</li></ol></article>
+<article class="download-card linux"><p class="platform">LINUX</p><h3>Ready for your desktop.</h3><p>For Intel/AMD 64-bit Linux with glibc 2.17 or later.</p><a class="button mint download" href="downloads/Postbox-linux-x64.tar.gz" download>Download for Linux <span aria-hidden="true">↓</span></a><p class="file-detail">TAR.GZ · 81.9 MiB · Includes Python</p><ol><li>Extract the entire archive.</li><li>Open a terminal in the extracted folder.</li><li>Run <code>./"Start Postbox.sh"</code>.</li></ol><details><summary>If the launcher needs permission</summary><pre><code>chmod +x "Start Postbox.sh"
+./"Start Postbox.sh"</code></pre><p>Run from a folder that permits executable files. ARM and Alpine/musl systems need a different runtime.</p></details></article>
+</div>
+<p class="download-extra"><a href="downloads/Postbox-source.zip" download>Download the source ZIP</a><span aria-hidden="true"> · </span><a href="downloads/SHA256SUMS.txt">SHA-256 checksums</a><span aria-hidden="true"> · </span><a href="https://github.com/mguhlin/mguhlin.github.io/tree/main/postbox/app">Browse the code on GitHub ↗</a></p>
+<p class="quiet">The download page is online. The viewer runs on your own computer at a localhost address and works without internet after download.</p>
+</section>
+<section class="features section" aria-labelledby="features-title"><div class="wrap"><p class="eyebrow">LESS HUNTING. MORE FINDING.</p><h2 id="features-title">An email archive you can actually use.</h2><div class="feature-grid">
+<article><span class="feature-number">01 / READ</span><h3>Open your exports.</h3><p>Import EML messages or MBOX archives, including folders of files. HTML opens automatically when available, with a plain-text fallback and a green Next button.</p></article>
+<article><span class="feature-number">02 / FIND</span><h3>Search with purpose.</h3><p>Combine <code>from:</code>, <code>to:</code>, <code>cc:</code>, <code>subject:</code>, <code>body:</code>, and <code>has:attachment</code>. Search includes HTML-only message text and attachment filenames.</p></article>
+<article><span class="feature-number">03 / PREVIEW</span><h3>See what came with it.</h3><p>Preview PDFs, photos, audio, and video. Read extracted text from DOCX and supported DOC files. Download the original attachment whenever you need it.</p></article>
+<article><span class="feature-number">04 / ORGANIZE</span><h3>Make room for what matters.</h3><p>Browse year/month groups, select a date range, and export attachments into folders. Select multiple messages or attachments for deletion, then advance to the next email.</p></article>
+</div></div></section>
+<section id="start" class="wrap section start" aria-labelledby="start-title"><div><p class="eyebrow">YOUR FIRST FIVE MINUTES</p><h2 id="start-title">Keep it local.<br>Keep it simple.</h2><p>Once the viewer opens, choose <strong>Open managed folder</strong> to work with original email files, or import copies to browse.</p></div><div class="steps"><ol>
+<li><strong>Choose your archive.</strong> Open <code>.eml</code>, <code>.mbox</code>, or <code>.mbx</code> exports. Files stay on your computer.</li>
+<li><strong>Find a message.</strong> Try <code>from:ada has:attachment</code>, or filter by dates and select the matching results.</li>
+<li><strong>Save what you need.</strong> Export attachments to a chosen folder, organized by year, month, and email.</li>
+<li><strong>Close when you’re finished.</strong> Keep the launcher’s terminal open while using Postbox. Press <kbd>Ctrl</kbd> + <kbd>C</kbd> there to stop it.</li>
+</ol></div></section>
+<section class="wrap section faq" aria-labelledby="faq-title"><h2 id="faq-title">A few useful details.</h2>
+<details><summary>Which browser should I use?</summary><p>Chrome or Edge supports choosing folders and changing original files. Other modern browsers can read imported copies, delete from the session, and export attachments as a ZIP. PDF and media previews depend on your browser and codecs.</p></details>
+<details><summary>What does Delete this email do?</summary><p>It follows the selected deletion mode. Original-file deletion removes an EML file or rewrites its MBOX archive; embedded attachments go with the email. Attachment-only deletion rewrites the source email. Session-only deletion leaves files on disk unchanged. Confirmation and original-file checks happen first; separately exported files are never removed. Successful deletion opens the next remaining message. Deletion cannot be undone in Postbox.</p></details>
+<details><summary>Does it upload my email or load trackers?</summary><p>The app uses a loopback server on your computer. It has no external email service, analytics, or account. Message HTML is sanitized and isolated; scripts, remote images, and navigation are blocked. MBOX parsing briefly uses a local temporary file, which is removed after parsing.</p></details>
+<details><summary>What are the limits?</summary><p>Each imported file is limited to 100 MB, and the archive is held in memory. Split larger MBOX exports before importing. MSG and PST need conversion to EML or MBOX first. Word previews show text rather than page layout; encrypted and unsupported document variants require another application. Attached-file contents are not indexed by email search.</p></details>
+<details><summary>Has it been tested on both operating systems?</summary><p>The bundled Linux runtime, MIME/MBOX handling, and organizer have automated checks. Navigation and file actions have DOM regression tests with simulated file handles. Windows package contents are verified, but native Windows execution has not yet been tested.</p></details>
+</section>
+</main>
+<footer class="footer"><div class="wrap"><div><a class="brand" href="./">✉ Postbox</a><p>Created by <strong>Miguel Guhlin</strong>.</p></div><div class="footer-links"><a href="https://splatworks.org/">SplatWorks.org ↗</a><a href="https://buymeacoffee.com/drawsplat" class="button gold">☕ Buy Me a Coffee</a><a href="../">More creations ↗</a></div></div></footer>
+</body></html>
