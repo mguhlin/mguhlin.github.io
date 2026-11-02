@@ -69,3 +69,7 @@ The SplatWorks purple theme preserves green Next and red Delete actions. [About 
 ## Blog introduction
 
 [Postbox: A free way to read your Proton Mail and MBOX exports](https://mguhlin.org/blog/2026-11-01-postbox-a-free-way-to-read-your-proton-mail-and-mbox-exports/).
+
+## Planned macOS version
+
+Portable Apple Silicon and Intel Mac downloads are planned for **November 8, 2026**. Python will be included. [Saved scope, estimates, compatibility findings, and remaining work](docs/macos-portable-plan.md).
