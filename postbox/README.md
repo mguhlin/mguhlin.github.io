@@ -65,3 +65,7 @@ To rebuild portable packages, follow `app/README.md`, then update the downloads 
 PST and MSG can be imported directly, with their mail headers, bodies, and extracted attachments. **Export emails as EML ZIP** and **Export emails as MBOX** convert selected emails into portable exports. The original PST is never rewritten. Source builds need a compatible `pypff` reader for PST; native wheels for the bundled CPython 3.13 runtimes are in `app/vendor/`, with licenses and corresponding source in `app/licenses/`. Run `test_outlook.py` with the other Python checks.
 
 The SplatWorks purple theme preserves green Next and red Delete actions. [About Developer](https://mguhlin.github.io/postbox/about.html) credits Miguel Guhlin and includes [Buy Me a Coffee](https://buymeacoffee.com/drawsplat).
+
+## Blog introduction
+
+[Postbox: A free way to read your Proton Mail and MBOX exports](https://mguhlin.org/blog/2026-11-01-postbox-a-free-way-to-read-your-proton-mail-and-mbox-exports/).
