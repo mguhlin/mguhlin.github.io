@@ -40,6 +40,17 @@ def remove_attachments(raw, selected):
 
 
 def rebuild_source(source, records):
+    if source['filename'].lower().endswith('.pst'):
+        with tempfile.TemporaryDirectory(prefix='postbox-export-') as folder:
+            path = Path(folder) / 'export.mbox'
+            output = mailbox.mbox(path)
+            try:
+                for record in records:
+                    output.add(mailbox.mboxMessage(record['raw']))
+                output.flush()
+                return path.read_bytes()
+            finally:
+                output.close()
     if not source['filename'].lower().endswith(('.mbox', '.mbx')):
         return records[0]['raw'] if records else None
     # Preserve original From_ envelope lines while mailbox handles escaping and

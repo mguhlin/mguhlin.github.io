@@ -51,7 +51,7 @@ function updateSelectionCount() {
   const visible=filteredMessages(),index=visible.findIndex(m=>m.id===selected);
   $('nextEmail').disabled = busy || !selected || index>=visible.length-1;
   $('deleteCurrent').title = $('deleteMode').value === 'originals' ? 'Delete this email from its original file on disk' : 'Remove this email from this session only';
-  for (const id of ['deleteMessages','selectMessageAttachments','exportMessages']) $(id).disabled = busy || !selectedMessages.size;
+  for (const id of ['deleteMessages','selectMessageAttachments','exportMessages','exportEml','exportMbox']) $(id).disabled = busy || !selectedMessages.size;
   for (const id of ['deleteAttachments','exportAttachments']) $(id).disabled = busy || !selectedAttachments.size;
 }
 function setBusy(value) {
@@ -133,12 +133,14 @@ function renderAttachments(m) {
 function show(m) {
   $('readerStatus').hidden=true;
   selected=m.id;$('empty').hidden=true;$('reader').hidden=false;$('subject').textContent=m.subject;$('meta').replaceChildren();
-  for(const [label,value] of [['From',m.sender],['To',m.to],['Cc',m.cc],['Date',m.date]]) {
+  for(const [label,value] of [['From',m.sender],['To',m.to],['Cc',m.cc],['Date',m.date],['Folder',m.outlookFolder]]) {
     if(!value)continue;const dt=document.createElement('dt'),dd=document.createElement('dd');dt.textContent=label;dd.textContent=value;$('meta').append(dt,dd);
   }
   $('body').textContent=m.plain||m.bodyText||'No readable message body.';
   $('html').removeAttribute('src');$('htmlTab').disabled=!m.hasHtml;$('original').href=url(m.id,'original');
+  $('original').textContent=m.sourceFormat?'Save email as .eml':'Save original .eml';
   setView(m.hasHtml);renderAttachments(m);render();
+  if(m.sourceFormat==='pst')setReaderStatus('Imported from Outlook PST. The original archive is read-only. Export selected emails as EML/MBOX, or choose This session only when deleting.');
 }
 
 async function api(path,payload) {
@@ -158,42 +160,45 @@ async function importOne(file,handle=null,parent=null) {
   return imported.length;
 }
 async function loadFiles(files) {
-  if(busy)return;setBusy(true);let count=0,failed=0;
+  if(busy)return;setBusy(true);let count=0,failed=0;const errors=[];
   try {
-    const accepted=[...files].filter(f=>/\.(eml|mbox|mbx)$/i.test(f.name));
+    const accepted=[...files].filter(f=>/\.(eml|mbox|mbx|msg|pst)$/i.test(f.name));
     for(const file of accepted) {
       setStatus(`Opening ${file.name}…`);
-      try {count+=await importOne(file)}catch(e){failed++}
+      try {count+=await importOne(file)}catch(e){failed++;errors.push(`${file.name}: ${e.message}`)}
     }
     if(!selected&&messages.length)show(messages[0]);else render();
-    setStatus(`${count} messages opened${failed?`; ${failed} file(s) failed (100 MB maximum per file)`:''}. Imported copies: use a managed folder to edit originals.`);
+    setStatus(`${count} messages opened${failed?`; ${failed} file(s) failed`:''}. ${errors.join(' ')||'PST originals stay read-only. Use a managed folder to edit other originals.'}`);
+    $('importReport').textContent=errors.join('\n');$('importReport').hidden=!errors.length;
   } finally {setBusy(false);$('files').value='';$('folders').value=''}
 }
 async function openFiles() {
   if(!window.showOpenFilePicker){$('files').click();return}
   try {
-    const handles=await window.showOpenFilePicker({multiple:true,types:[{description:'Email exports',accept:{'application/octet-stream':['.eml','.mbox','.mbx']}}]});
-    setBusy(true);let count=0,failed=0;
-    for(const handle of handles) {try{count+=await importOne(await handle.getFile(),handle)}catch(e){failed++}}
+    const handles=await window.showOpenFilePicker({multiple:true,types:[{description:'Email and Outlook exports',accept:{'application/octet-stream':['.eml','.mbox','.mbx','.msg','.pst']}}]});
+    setBusy(true);let count=0,failed=0;const errors=[];
+    for(const handle of handles) {try{count+=await importOne(await handle.getFile(),handle)}catch(e){failed++;errors.push(`${handle.name}: ${e.message}`)}}
     if(!selected&&messages.length)show(messages[0]);else render();
     setStatus(`${count} messages opened${failed?`; ${failed} files failed`:''}. For deleting .eml originals, select their containing folder when asked.`);
+    $('importReport').textContent=errors.join('\n');$('importReport').hidden=!errors.length;
   }catch(e){if(e.name!=='AbortError')setStatus(e.message)}finally{setBusy(false)}
 }
 async function openFolder() {
   if(!window.showDirectoryPicker){$('folders').click();return}
   try {
-    const folder=await window.showDirectoryPicker({mode:'readwrite'});setBusy(true);let count=0,failed=0;
+    const folder=await window.showDirectoryPicker({mode:'readwrite'});setBusy(true);let count=0,failed=0;const errors=[];
     async function walk(directory) {
       for await(const entry of directory.values()) {
         if(entry.kind==='directory')await walk(entry);
-        else if(/\.(eml|mbox|mbx)$/i.test(entry.name)) {
+        else if(/\.(eml|mbox|mbx|msg|pst)$/i.test(entry.name)) {
           setStatus(`Opening ${entry.name}…`);
-          try{count+=await importOne(await entry.getFile(),entry,directory)}catch(e){failed++}
+          try{count+=await importOne(await entry.getFile(),entry,directory)}catch(e){failed++;errors.push(`${entry.name}: ${e.message}`)}
         }
       }
     }
     await walk(folder);if(!selected&&messages.length)show(messages[0]);else render();
     setStatus(`${count} messages opened from managed files${failed?`; ${failed} files failed`:''}. Original-file editing is available.`);
+    $('importReport').textContent=errors.join('\n');$('importReport').hidden=!errors.length;
   }catch(e){if(e.name!=='AbortError')setStatus(e.message)}finally{setBusy(false)}
 }
 
@@ -267,6 +272,15 @@ async function exportAttachments(allFromMessages) {
 }
 
 async function sha256(file) {const bytes=await file.arrayBuffer();return [...new Uint8Array(await crypto.subtle.digest('SHA-256',bytes))].map(b=>b.toString(16).padStart(2,'0')).join('')}
+async function exportEmails(format) {
+  if(busy||!selectedMessages.size)return;setBusy(true);
+  try {
+    const response=await api('/export-emails',{messageIds:[...selectedMessages],format});
+    const blob=await response.blob(),href=URL.createObjectURL(blob),link=document.createElement('a');
+    link.href=href;link.download=format==='mbox'?'Postbox-emails.mbox':'Postbox-emails.zip';link.click();
+    setTimeout(()=>URL.revokeObjectURL(href),60000);setStatus(`Exported ${selectedMessages.size} email(s) as ${format==='mbox'?'MBOX':'an EML ZIP'}, including their attachments.`);
+  }catch(e){setStatus(e.message)}finally{setBusy(false)}
+}
 function decodeData(encoded) {return Uint8Array.from(atob(encoded),c=>c.charCodeAt(0))}
 
 async function connectOriginals(changes,action) {
@@ -324,6 +338,7 @@ async function deleteSelected(action, messageIds=null) {
   setBusy(true);setReaderStatus('Preparing deletion…');
   try {
     const plan=await (await api('/plan',{action,messageIds:ids,attachments})).json();
+    if(originals&&plan.changes.some(change=>change.originalWritable===false))throw Error('Outlook PST archives are read-only, and MSG attachments cannot be rewritten in place. Explicitly choose "This session only" to remove imported items, or export emails as EML/MBOX for editing. No original files were changed.');
     if(originals)await connectOriginals(plan.changes,action);
     // Check every source before the first disk mutation, then check it again
     // immediately before its write/delete in case another application edits it.
@@ -389,6 +404,7 @@ function init() {
   };
   $('deleteMode').addEventListener('change',updateSelectionCount);
   $('exportMessages').onclick=()=>exportAttachments(true);$('exportAttachments').onclick=()=>exportAttachments(false);
+  $('exportEml').onclick=()=>exportEmails('eml');$('exportMbox').onclick=()=>exportEmails('mbox');
   $('textTab').onclick=()=>setView(false);$('htmlTab').onclick=()=>setView(true);
   $('previewClose').onclick=()=>$('previewDialog').close();$('previewDialog').addEventListener('close',()=>{previewRequest++;$('previewContent').replaceChildren()});
   $('clear').onclick=async()=>{

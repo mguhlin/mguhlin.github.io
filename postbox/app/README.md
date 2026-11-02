@@ -15,7 +15,7 @@ Open multiple `.eml` exports, select a folder (including subfolders), or drop fi
 
 The app listens only on your computer's loopback address. Imported messages are held in memory. Original files change only when you explicitly select deletion from original files and confirm. MBOX imports briefly use a temporary local file, which is deleted immediately after parsing. Nothing is uploaded to an external service. Reloading the page resets the visible list; use Clear session or stop the app to discard imported data from server memory. Downloads are saved by your browser and remain after clearing a session.
 
-HTML scripts, links, remote images, and external styles are blocked. CID inline images are offered as downloadable attachments rather than embedded in HTML. Encrypted messages are not decrypted, signatures are not verified, and Outlook `.msg` and PST archives must first be exported to `.eml`. Very large archives consume RAM; each file is limited to 100 MB. Attached emails remain downloadable as original message files.
+HTML scripts, links, remote images, and external styles are blocked. CID inline images are offered as downloadable attachments rather than embedded in HTML. Encrypted messages are not decrypted, signatures are not verified, and Outlook `.msg` messages and `.pst` archives can now be imported directly. OST/OLM and other unsupported formats must first be exported to EML/MBOX. Very large archives consume RAM; PST files are limited to 2 GB and other files to 100 MB. Attached emails remain downloadable as original message files.
 
 To choose a port: `python3 app.py --port 8767`. To launch without opening a browser: add `--no-open`.
 
@@ -24,7 +24,7 @@ To choose a port: `python3 app.py --port 8767`. To launch without opening a brow
 
 Run `python3 build_portable.py --linux-runtime /path/to/python-linux.tar.gz --windows-runtime /path/to/python-windows.zip` using Python 3.12+.
 
-The included packages use [Astral python-build-standalone](https://github.com/astral-sh/python-build-standalone/releases/tag/20261026) CPython 3.13.18 for Linux and the [official Python 3.13.9 Windows embeddable runtime](https://www.python.org/ftp/python/3.13.9/). Runtime licenses are retained. Linux was checked using the bundled interpreter; Windows package contents were checked, but execution on Windows remains untested.
+The included packages use [Astral python-build-standalone](https://github.com/astral-sh/python-build-standalone/releases/tag/20261026) CPython 3.13.18 for Linux and the [official Python 3.13.9 Windows embeddable runtime](https://www.python.org/ftp/python/3.13.9/). Runtime licenses are retained. Linux was checked using the bundled interpreter; Windows and Linux packaged-runtime checks are configured in [GitHub Actions](https://github.com/mguhlin/mguhlin.github.io/actions/workflows/postbox-checks.yml).
 
 ## Search filters
 
@@ -80,10 +80,24 @@ Deletion cannot be undone in Postbox. Attachment deletion removes the MIME attac
 
 ## Checks
 
-Run `python3 -m unittest -v test_viewer.py test_previews.py test_organizer.py` and `node test_search.cjs`. The organizer tests cover non-destructive planning, MIME attachment removal, MBOX rebuilding, modified-source rejection, and ZIP exports. Native file access was exercised with simulated browser handles in DOM tests; real Windows execution remains untested.
+Run `python3 -m unittest -v test_viewer.py test_previews.py test_organizer.py` and `node test_search.cjs`. The organizer tests cover non-destructive planning, MIME attachment removal, MBOX rebuilding, modified-source rejection, and ZIP exports. Native file access was exercised with simulated browser handles in DOM tests; packaged-runtime results are available in GitHub Actions.
 
 ## Reader deletion and automatic advance
 
 Delete this email removes only the displayed email and its embedded attachments. After success, Postbox opens the next remaining email in the current filtered, date-sorted list. At the end it opens the nearest previous email; with no matches left it clears the reader. Failed or cancelled deletions keep the current email open. Other checkbox selections remain intact.
 
 If an original was imported as a copy, deletion now offers to reconnect its original folder instead of stopping with a distant status message. Choose the containing folder; Postbox checks filenames and SHA-256 content before modifying anything. Ambiguous or changed files are refused. Success and error messages appear immediately under the reader controls. Original-file edits still require Chrome/Edge local file access; other browsers can explicitly use This session only. An older running server that lacks the delete endpoint shows a restart instruction.
+
+## Outlook PST and MSG imports
+
+Open Outlook `.pst` archives and `.msg` saved messages directly with the standard file/folder controls. No Outlook installation is required. PST support uses the included CPython 3.13 `libpff-python` reader for the package's operating system; pure-Python source runs need a compatible installed reader. The package retains library licenses and the corresponding source archive in `licenses/`.
+
+PST archives are read-only. Deletion from original PST files is blocked before any disk modification. Use **This session only** to remove imported messages/attachments, or select emails and choose **Export emails as EML ZIP** / **Export emails as MBOX**. Both exports preserve extracted attachments. Reimport the exported EML/MBOX to edit its originals. MSG originals can be deleted as whole files, but removing an attachment cannot rewrite MSG in place; use a session copy or an EML export instead. Save email as .eml creates a converted message rather than an original Outlook binary.
+
+PST imports stream up to 2 GB through a temporary local file, deleted after parsing. Other files remain limited to 100 MB. Extracted messages and attachments stay in RAM; large archives can still consume substantial memory. Mail folders are recorded in message details. Contacts, distribution lists, tasks, and calendar objects are excluded. Embedded/linked, damaged, or unsupported attachment variants may stop an import with a visible error rather than silently discard attachment data. RTF-only bodies without a plain-text/HTML representation, encrypted mail, OST, and OLM may need conversion in Outlook first.
+
+Validation used public examples from [pst-extractor](https://github.com/epfromer/pst-extractor) and [msg-extractor](https://github.com/TeamMsgExtractor/msg-extractor). The PST sample yielded 71 emails with attachment data. Native reader wheels and package contents are verified. See GitHub Actions for Windows and Linux packaged-runtime checks; file-picker interactions are tested with simulated handles.
+
+## About Developer and theme
+
+The top-right **About Developer** link opens an offline page in a separate tab, preserving the current viewer session. It credits Miguel Guhlin and includes SplatWorks, his blog, GitHub, and the Buy Me a Coffee link. The interface uses SplatWorks purple (`#7c3aed` / `#a855f7`), with green Next and red Delete actions retained.

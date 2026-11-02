@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Offline EML viewer. Python standard library only."""
+"""Portable offline email viewer with Outlook import."""
 import argparse
 import base64
 import io
@@ -24,12 +24,14 @@ ROOT = Path(__file__).parent
 sys.path.insert(0, str(ROOT.resolve()))
 from previews import MEDIA, preview_kind, text_preview
 from organizer import digest, remove_attachments, rebuild_source, safe_filename
+from outlook import import_msg, import_pst
 MESSAGES = {}
 SOURCES = {}
 PLANS = {}
 STATE_LOCK = threading.RLock()
 TOKEN = secrets.token_urlsafe(24)
 MAX_BYTES = 100 * 1024 * 1024
+MAX_PST_BYTES = 2 * 1024 * 1024 * 1024
 
 
 class SafeEmailHTML(HTMLParser):
@@ -113,6 +115,15 @@ def html_text(content):
 
 
 def parse_export(raw, filename):
+    if filename.lower().endswith('.msg'):
+        message = parse_message(import_msg(raw), Path(filename).stem + '.eml')
+        message['sourceFormat'] = 'msg'
+        return [message]
+    if filename.lower().endswith('.pst'):
+        with tempfile.TemporaryDirectory(prefix='postbox-pst-') as folder:
+            path = Path(folder) / 'archive.pst'
+            path.write_bytes(raw)
+            return import_pst(path, parse_message, filename)
     if not filename.lower().endswith(('.mbox', '.mbx')):
         return [parse_message(raw, filename)]
     if raw.strip() and not raw.startswith(b'From '):
@@ -206,18 +217,23 @@ def create_plan(payload):
                 raw = remove_attachments(message['raw'], set(attachment_ids[mid]))
                 updated = parse_message(raw, message['filename'])
                 updated.update(id=mid, sourceId=sid, sourceIndex=message['sourceIndex'])
+                for field in ('sourceFormat', 'outlookFolder'):
+                    if field in message:
+                        updated[field] = message[field]
                 message = updated
             records.append(message)
         raw = rebuild_source(source, records)
         changes.append(dict(sourceId=sid, filename=source['filename'], oldDigest=digest(source['raw']),
+                            originalWritable=not source['filename'].lower().endswith('.pst') and
+                                not (source['filename'].lower().endswith('.msg') and action == 'attachments'),
                             raw=raw, records=records, oldIds=list(source['messageIds'])))
     plan_id = secrets.token_hex(16)
     # Keep only the latest plan to avoid retaining abandoned copies of archives.
     PLANS.clear()
     PLANS[plan_id] = changes
     return dict(planId=plan_id, changes=[dict(sourceId=c['sourceId'], filename=c['filename'],
-                oldDigest=c['oldDigest'], delete=c['raw'] is None,
-                data=base64.b64encode(c['raw']).decode() if c['raw'] is not None else None) for c in changes])
+                oldDigest=c['oldDigest'], delete=c['raw'] is None, originalWritable=c['originalWritable'],
+                data=base64.b64encode(c['raw']).decode() if c['raw'] is not None and c['originalWritable'] else None) for c in changes])
 
 
 def commit_plan(payload):
@@ -264,11 +280,16 @@ class Handler(BaseHTTPRequestHandler):
 
     def do_GET(self):
         path = urlparse(self.path).path
+        if path in ('/about.html', '/theme.css'):
+            name = path[1:]
+            kind = 'text/html' if name.endswith('.html') else 'text/css'
+            self.send((ROOT / name).read_bytes(), kind + '; charset=utf-8')
+            return
         if path == '/app.js':
             self.send((ROOT / 'app.js').read_bytes(), 'text/javascript; charset=utf-8')
             return
-        if path == '/hero.png':
-            self.send((ROOT / 'hero.png').read_bytes(), 'image/png')
+        if path in ('/hero.png', '/hero-purple.png'):
+            self.send((ROOT / path[1:]).read_bytes(), 'image/png')
             return
         if path == '/':
             self.send((ROOT / 'index.html').read_text(encoding='utf-8').replace('__TOKEN__', TOKEN), 'text/html; charset=utf-8', extra={'Content-Security-Policy': "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'unsafe-inline'; frame-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'"})
@@ -319,7 +340,7 @@ class Handler(BaseHTTPRequestHandler):
             PLANS.clear()
             self.send('{}')
             return
-        if self.path in ('/plan', '/commit', '/export'):
+        if self.path in ('/plan', '/commit', '/export', '/export-emails'):
             try:
                 length = int(self.headers.get('Content-Length', '0'))
                 if not 0 < length < 4 * 1024 * 1024:
@@ -329,6 +350,21 @@ class Handler(BaseHTTPRequestHandler):
                     self.send(json.dumps(create_plan(payload)))
                 elif self.path == '/commit':
                     self.send(json.dumps(commit_plan(payload)))
+                elif self.path == '/export-emails':
+                    ids = payload.get('messageIds', [])
+                    if not ids or any(mid not in MESSAGES for mid in ids):
+                        raise ValueError('Select existing emails to export.')
+                    if payload.get('format') == 'mbox':
+                        raw = rebuild_source(dict(filename='export.pst', raw=b''), [MESSAGES[mid] for mid in ids])
+                        self.send(raw, 'application/mbox', download='Postbox-emails.mbox')
+                    else:
+                        buffer = io.BytesIO()
+                        with zipfile.ZipFile(buffer, 'w', zipfile.ZIP_DEFLATED) as archive:
+                            for index, mid in enumerate(ids):
+                                message = MESSAGES[mid]
+                                name = safe_filename(message['subject'])
+                                archive.writestr(f'{index + 1:05d}_{message["dateKey"] or "undated"}_{name}.eml', message['raw'])
+                        self.send(buffer.getvalue(), 'application/zip', download='Postbox-emails.zip')
                 else:
                     buffer = io.BytesIO()
                     with zipfile.ZipFile(buffer, 'w', zipfile.ZIP_DEFLATED) as archive:
@@ -347,14 +383,31 @@ class Handler(BaseHTTPRequestHandler):
             self.send('{}', status=404)
             return
         try:
-            length = int(self.headers.get('Content-Length', '0'))
-            if not 0 < length <= MAX_BYTES:
-                self.send('{"error":"Choose a file smaller than 100 MB."}', status=413)
-                return
             from urllib.parse import unquote
             filename = unquote(self.headers.get('X-Filename', 'message.eml'))
-            raw = self.rfile.read(length)
-            imported = parse_export(raw, filename)
+            is_pst = filename.lower().endswith('.pst')
+            length = int(self.headers.get('Content-Length', '0'))
+            if not 0 < length <= (MAX_PST_BYTES if is_pst else MAX_BYTES):
+                self.send(json.dumps({'error': 'PST limit is 2 GB; other imports are limited to 100 MB.'}), status=413)
+                return
+            if is_pst:
+                # Stream large archives to a temporary file instead of keeping
+                # an extra multi-gigabyte original in server RAM.
+                with tempfile.TemporaryDirectory(prefix='postbox-pst-') as folder:
+                    path = Path(folder) / 'archive.pst'
+                    with path.open('wb') as output:
+                        remaining = length
+                        while remaining:
+                            chunk = self.rfile.read(min(1024 * 1024, remaining))
+                            if not chunk:
+                                raise ValueError('The PST upload was interrupted.')
+                            output.write(chunk)
+                            remaining -= len(chunk)
+                    imported = import_pst(path, parse_message, filename)
+                raw = b''  # PST originals are never rewritten or retained.
+            else:
+                raw = self.rfile.read(length)
+                imported = parse_export(raw, filename)
             sid = secrets.token_hex(12)
             SOURCES[sid] = dict(filename=filename, raw=raw, messageIds=[m['id'] for m in imported])
             results = []
@@ -363,8 +416,10 @@ class Handler(BaseHTTPRequestHandler):
                 MESSAGES[message['id']] = message
                 results.append(public_message(message))
             self.send(json.dumps(results))
+        except (ValueError, OSError) as error:
+            self.send(json.dumps({'error': str(error)}), status=400)
         except Exception:
-            self.send('{"error":"This message could not be read."}', status=400)
+            self.send('{"error":"This file could not be read. Use a supported email export."}', status=400)
 
 
 def main():

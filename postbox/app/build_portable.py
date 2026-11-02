@@ -13,8 +13,11 @@ def build(linux_archive, windows_archive, output):
     for platform in ('linux-x64', 'windows-x64'):
         folder = output / ('Postbox-' + platform)
         folder.mkdir(exist_ok=True)
-        for name in ('app.py', 'index.html', 'test_viewer.py', 'README.md', 'previews.py', 'olefile.py', 'OLEFILE-LICENSE.txt', 'hero.png', 'test_previews.py', 'app.js', 'organizer.py', 'test_organizer.py', 'test_search.cjs'):
+        for name in ('app.py', 'index.html', 'test_viewer.py', 'README.md', 'previews.py', 'olefile.py', 'OLEFILE-LICENSE.txt', 'hero.png', 'hero-purple.png', 'test_previews.py', 'app.js', 'organizer.py', 'test_organizer.py', 'test_search.cjs', 'outlook.py', 'test_outlook.py', 'about.html', 'theme.css'):
             shutil.copy2(ROOT / name, folder / name)
+        shutil.copytree(ROOT / 'vendor' / ('linux' if platform == 'linux-x64' else 'windows'),
+                        folder / 'vendor' / ('linux' if platform == 'linux-x64' else 'windows'), dirs_exist_ok=True)
+        shutil.copytree(ROOT / 'licenses', folder / 'licenses', dirs_exist_ok=True)
         runtime = folder / 'runtime'
         runtime.mkdir(exist_ok=True)
         if platform == 'linux-x64':
@@ -39,7 +42,9 @@ def build(linux_archive, windows_archive, output):
             'Extract the entire archive before launching; keep runtime and app files together.\n'
             'A browser opens automatically. Keep the terminal open; press Ctrl+C to stop.\n'
             'If necessary, open the local address printed in the terminal.\n\n'
-            'Open .eml, .mbox or .mbx files or folders; read messages and save attachments.\n'
+            'Open .eml, .msg, .pst, .mbox or .mbx files or folders. PST originals remain read-only.\n'
+            'PST imports: up to 2 GB, with memory use depending on extracted emails/attachments. Other files: up to 100 MB.\n'
+            'Export selected Outlook emails as EML ZIP or MBOX for editing.\n'
             'Search: from:ada to:grace subject:"meeting notes" body:budget has:attachment.\n'
             'Use has:noattachment for messages without attachments. See README.md.\n'
             'Messages stay local. Delete from originals explicitly changes source files.\n'

@@ -4,7 +4,7 @@
 
 Created by **Miguel Guhlin** · [SplatWorks.org](https://splatworks.org/) · [Buy Me a Coffee](https://buymeacoffee.com/drawsplat)
 
-Postbox opens exported `.eml`, `.mbox`, and `.mbx` email files locally. Both portable packages include Python: extract the entire download and launch it. No Python installation, pip packages, accounts, or internet connection is needed after download. A modern web browser is required.
+Postbox opens exported `.eml`, `.msg`, `.pst`, `.mbox`, and `.mbx` email files locally. Both portable packages include Python: extract the entire download and launch it. No Python installation, pip packages, accounts, or internet connection is needed after download. A modern web browser is required.
 
 ## Downloads
 
@@ -39,14 +39,14 @@ Original-file deletion permanently removes EML files or rewrites MBOX archives. 
 
 ## Limits and validation
 
-Each import is limited to 100 MB and messages are held in memory. MBOX parsing briefly uses a local temporary file, which is removed afterwards. Search indexes email body text and attachment filenames, not attached-file contents. DOC/DOCX previews show text rather than original layout. PDF and media formats depend on browser support. MSG/PST must first be converted to EML or MBOX; encrypted messages are not decrypted and signatures are not verified.
+PST imports stream up to 2 GB through a temporary local file; other files are limited to 100 MB. Extracted messages and attachments are held in memory. MBOX/PST parsing briefly uses a local temporary file, which is removed afterwards. Search indexes email body text and attachment filenames, not attached-file contents. DOC/DOCX previews show text rather than original layout. PDF and media formats depend on browser support. PST originals stay read-only and MSG attachment edits cannot be written back to MSG; export selected emails to EML ZIP/MBOX for editing. Contacts and calendar records are excluded; encrypted messages are not decrypted and signatures are not verified.
 
-The bundled Linux runtime and MIME/MBOX/organizer have automated checks. DOM regression checks cover navigation, reconnecting original files, deletion, auto-advance, and export with simulated file handles. Windows package contents are checked; native Windows execution remains untested.
+The bundled Linux runtime and MIME/MBOX/organizer have automated checks. DOM regression checks cover navigation, reconnecting original files, deletion, auto-advance, and export with simulated file handles. Windows package contents are checked; packaged-runtime checks run on Windows and Linux in [GitHub Actions](https://github.com/mguhlin/mguhlin.github.io/actions/workflows/postbox-checks.yml).
 
 Run the source checks from `app/`:
 
 ```sh
-python3 -m unittest -v test_viewer.py test_previews.py test_organizer.py
+python3 -m unittest -v test_viewer.py test_previews.py test_organizer.py test_outlook.py
 node test_search.cjs
 ```
 
@@ -59,3 +59,9 @@ This folder lives in `mguhlin/mguhlin.github.io`, published by GitHub Pages at `
 - `app/`: application source, build helper, tests, and the full user guide.
 
 To rebuild portable packages, follow `app/README.md`, then update the downloads and their checksums together. Python runtime licenses are included in each package. The bundled DOC reader's license is in `app/OLEFILE-LICENSE.txt`.
+
+## Outlook and developer update
+
+PST and MSG can be imported directly, with their mail headers, bodies, and extracted attachments. **Export emails as EML ZIP** and **Export emails as MBOX** convert selected emails into portable exports. The original PST is never rewritten. Source builds need a compatible `pypff` reader for PST; native wheels for the bundled CPython 3.13 runtimes are in `app/vendor/`, with licenses and corresponding source in `app/licenses/`. Run `test_outlook.py` with the other Python checks.
+
+The SplatWorks purple theme preserves green Next and red Delete actions. [About Developer](https://mguhlin.github.io/postbox/about.html) credits Miguel Guhlin and includes [Buy Me a Coffee](https://buymeacoffee.com/drawsplat).
