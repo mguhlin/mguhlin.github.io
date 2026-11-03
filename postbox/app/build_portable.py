@@ -13,7 +13,7 @@ def build(linux_archive, windows_archive, output):
     for platform in ('linux-x64', 'windows-x64'):
         folder = output / ('Postbox-' + platform)
         folder.mkdir(exist_ok=True)
-        for name in ('app.py', 'index.html', 'test_viewer.py', 'README.md', 'previews.py', 'olefile.py', 'OLEFILE-LICENSE.txt', 'hero.png', 'hero-purple.png', 'test_previews.py', 'app.js', 'organizer.py', 'test_organizer.py', 'test_search.cjs', 'outlook.py', 'test_outlook.py', 'about.html', 'theme.css'):
+        for name in ('app.py', 'print_export.py', 'test_print_export.py', 'test_pdf_browser.cjs', 'index.html', 'test_viewer.py', 'README.md', 'previews.py', 'olefile.py', 'OLEFILE-LICENSE.txt', 'hero.png', 'hero-purple.png', 'test_previews.py', 'app.js', 'organizer.py', 'test_organizer.py', 'test_search.cjs', 'outlook.py', 'test_outlook.py', 'about.html', 'theme.css'):
             shutil.copy2(ROOT / name, folder / name)
         shutil.copytree(ROOT / 'vendor' / ('linux' if platform == 'linux-x64' else 'windows'),
                         folder / 'vendor' / ('linux' if platform == 'linux-x64' else 'windows'), dirs_exist_ok=True)

@@ -25,6 +25,7 @@ sys.path.insert(0, str(ROOT.resolve()))
 from previews import MEDIA, preview_kind, text_preview
 from organizer import digest, remove_attachments, rebuild_source, safe_filename
 from outlook import import_msg, import_pst
+from print_export import print_document
 MESSAGES = {}
 SOURCES = {}
 PLANS = {}
@@ -292,7 +293,7 @@ class Handler(BaseHTTPRequestHandler):
             self.send((ROOT / path[1:]).read_bytes(), 'image/png')
             return
         if path == '/':
-            self.send((ROOT / 'index.html').read_text(encoding='utf-8').replace('__TOKEN__', TOKEN), 'text/html; charset=utf-8', extra={'Content-Security-Policy': "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'unsafe-inline'; frame-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'"})
+            self.send((ROOT / 'index.html').read_text(encoding='utf-8').replace('__TOKEN__', TOKEN), 'text/html; charset=utf-8', extra={'Content-Security-Policy': "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'unsafe-inline'; frame-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'"})
             return
         pieces = path.strip('/').split('/')
         if len(pieces) >= 3 and pieces[0] == TOKEN and pieces[1] in MESSAGES:
@@ -340,13 +341,22 @@ class Handler(BaseHTTPRequestHandler):
             PLANS.clear()
             self.send('{}')
             return
-        if self.path in ('/plan', '/commit', '/export', '/export-emails'):
+        if self.path in ('/plan', '/commit', '/export', '/export-emails', '/export-pdf'):
             try:
                 length = int(self.headers.get('Content-Length', '0'))
                 if not 0 < length < 4 * 1024 * 1024:
                     raise ValueError('Invalid request size.')
                 payload = json.loads(self.rfile.read(length))
-                if self.path == '/plan':
+                if self.path == '/export-pdf':
+                    ids = payload.get('messageIds', [])
+                    if not isinstance(ids, list) or not ids or any(not isinstance(mid, str) or mid not in MESSAGES for mid in ids):
+                        raise ValueError('Select existing emails to export.')
+                    if not isinstance(payload.get('clean', True), bool):
+                        raise ValueError('Invalid clean layout option.')
+                    self.send(print_document([MESSAGES[mid] for mid in dict.fromkeys(ids)],
+                                             payload.get('clean', True), payload.get('paper', 'letter')),
+                              'text/html; charset=utf-8')
+                elif self.path == '/plan':
                     self.send(json.dumps(create_plan(payload)))
                 elif self.path == '/commit':
                     self.send(json.dumps(commit_plan(payload)))

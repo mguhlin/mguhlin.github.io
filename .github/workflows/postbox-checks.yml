@@ -25,7 +25,7 @@ jobs:
           tar -xzf postbox/downloads/Postbox-linux-x64.tar.gz -C .postbox-runtime
           cd .postbox-runtime/Postbox-linux-x64
           ./runtime/python/bin/python3 -I app.py --help
-          ./runtime/python/bin/python3 -m unittest -v test_viewer.py test_previews.py test_organizer.py test_outlook.py
+          ./runtime/python/bin/python3 -m unittest -v test_viewer.py test_previews.py test_organizer.py test_outlook.py test_print_export.py
       - name: Test packaged Windows runtime
         if: runner.os == 'Windows'
         shell: pwsh
@@ -34,5 +34,5 @@ jobs:
           Set-Location .postbox-runtime/Postbox-windows-x64
           & .\runtime\python.exe -I app.py --help
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
-          & .\runtime\python.exe -m unittest -v test_viewer.py test_previews.py test_organizer.py test_outlook.py
+          & .\runtime\python.exe -m unittest -v test_viewer.py test_previews.py test_organizer.py test_outlook.py test_print_export.py
           exit $LASTEXITCODE

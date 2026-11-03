@@ -46,7 +46,7 @@ The bundled Linux runtime and MIME/MBOX/organizer have automated checks. DOM reg
 Run the source checks from `app/`:
 
 ```sh
-python3 -m unittest -v test_viewer.py test_previews.py test_organizer.py test_outlook.py
+python3 -m unittest -v test_viewer.py test_previews.py test_organizer.py test_outlook.py test_print_export.py
 node test_search.cjs
 ```
 
@@ -73,3 +73,12 @@ The SplatWorks purple theme preserves green Next and red Delete actions. [About 
 ## Planned macOS version
 
 Portable Apple Silicon and Intel Mac downloads are planned for **November 8, 2026**. Python will be included. [Saved scope, estimates, compatibility findings, and remaining work](docs/macos-portable-plan.md).
+
+
+## Printing emails and exporting PDFs
+
+Open a message and choose **Export this email as PDF**, or check messages and choose **Export selected emails as PDF**. Selection includes checked emails outside the current filters. Selected messages appear newest first, with each email starting on a new page in one document; long emails continue across pages.
+
+Leave **Clean layout: fit content to the page** checked to remove email styling, wrap long text, fit tables to the printable width, and resize images. Uncheck it to retain inline email formatting; unusually wide layouts may then need browser scaling or the clean option. Choose Letter or A4, then **Open print preview**. In the new tab, select **Print / Save as PDF** and choose your browser’s **Save as PDF** destination or a printer. Match the paper size to the preview; turn off browser headers and footers for a cleaner result. Allow Postbox pop-ups if the preview is blocked. Cancelling the print dialog keeps the preview available.
+
+PDFs include subject, sender, recipients, date, folder when available, message body, and attachment filenames. Attachment contents are not printed; export or print them separately. Remote images and active content remain blocked, and email data stays on your computer. PDF export uses the browser’s local print engine and works offline without an additional dependency. Download and restart the updated portable package to use these controls.

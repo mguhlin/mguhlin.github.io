@@ -101,3 +101,14 @@ Validation used public examples from [pst-extractor](https://github.com/epfromer
 ## About Developer and theme
 
 The top-right **About Developer** link opens an offline page in a separate tab, preserving the current viewer session. It credits Miguel Guhlin and includes SplatWorks, his blog, GitHub, and the Buy Me a Coffee link. The interface uses SplatWorks purple (`#7c3aed` / `#a855f7`), with green Next and red Delete actions retained.
+
+
+## Printing emails and exporting PDFs
+
+Open a message and choose **Export this email as PDF**, or check messages and choose **Export selected emails as PDF**. Selection includes checked emails outside the current filters. Selected messages appear newest first, with each email starting on a new page in one document; long emails continue across pages.
+
+Leave **Clean layout: fit content to the page** checked to remove email styling, wrap long text, fit tables to the printable width, and resize images. Uncheck it to retain inline email formatting; unusually wide layouts may then need browser scaling or the clean option. Choose Letter or A4, then **Open print preview**. In the new tab, select **Print / Save as PDF** and choose your browser’s **Save as PDF** destination or a printer. Match the paper size to the preview; turn off browser headers and footers for a cleaner result. Allow Postbox pop-ups if the preview is blocked. Cancelling the print dialog keeps the preview available.
+
+PDFs include subject, sender, recipients, date, folder when available, message body, and attachment filenames. Attachment contents are not printed; export or print them separately. Remote images and active content remain blocked, and email data stays on your computer. PDF export uses the browser’s local print engine and works offline without an additional dependency. Download and restart the updated portable package to use these controls.
+
+PDF regression checks: `python3 -m unittest -v test_print_export.py`. For the browser check, install Playwright separately, start `python3 app.py --no-open --port 8792`, then run `node test_pdf_browser.cjs` with Playwright on Node’s module path. It covers current/selected messages, selections outside filters, layout controls, wrapping, and print invocation, and writes a sample multipage PDF under `/tmp/`.

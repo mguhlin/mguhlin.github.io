@@ -48,10 +48,11 @@ function resetReader() {
 function updateSelectionCount() {
   $('selectionCount').textContent = `${selectedMessages.size} emails · ${selectedAttachments.size} attachments selected`;
   $('deleteCurrent').disabled = busy || !selected;
+  $('printCurrent').disabled = busy || !selected;
   const visible=filteredMessages(),index=visible.findIndex(m=>m.id===selected);
   $('nextEmail').disabled = busy || !selected || index>=visible.length-1;
   $('deleteCurrent').title = $('deleteMode').value === 'originals' ? 'Delete this email from its original file on disk' : 'Remove this email from this session only';
-  for (const id of ['deleteMessages','selectMessageAttachments','exportMessages','exportEml','exportMbox']) $(id).disabled = busy || !selectedMessages.size;
+  for (const id of ['deleteMessages','selectMessageAttachments','exportMessages','exportEml','exportMbox','exportPdf']) $(id).disabled = busy || !selectedMessages.size;
   for (const id of ['deleteAttachments','exportAttachments']) $(id).disabled = busy || !selectedAttachments.size;
 }
 function setBusy(value) {
@@ -272,6 +273,34 @@ async function exportAttachments(allFromMessages) {
 }
 
 async function sha256(file) {const bytes=await file.arrayBuffer();return [...new Uint8Array(await crypto.subtle.digest('SHA-256',bytes))].map(b=>b.toString(16).padStart(2,'0')).join('')}
+let pdfMessageIds = [];
+function openPdfOptions(current = false) {
+  if(busy)return;
+  pdfMessageIds = current ? (selected ? [selected] : []) : filterMessages(messages,'','','').filter(m=>selectedMessages.has(m.id)).map(m=>m.id);
+  if(!pdfMessageIds.length)return;
+  $('pdfCount').textContent = `${pdfMessageIds.length} email(s) will be exported.`;
+  $('pdfDialog').showModal();
+}
+async function previewPdf() {
+  // Open synchronously from the click so browsers allow the preview tab.
+  const preview = window.open('about:blank','_blank');
+  if(!preview){setStatus('Allow pop-ups for Postbox, then open the PDF preview again.');return;}
+  preview.document.body.textContent='Preparing your email print preview…';
+  preview.opener=null;
+  $('pdfDialog').close();setBusy(true);
+  try {
+    const response=await api('/export-pdf',{messageIds:pdfMessageIds,clean:$('pdfClean').checked,paper:$('pdfPaper').value});
+    const html=await response.text();
+    if(preview.closed)throw Error('The preview tab was closed. Open PDF export again.');
+    preview.document.open();preview.document.write(html);preview.document.close();
+    preview.document.getElementById('printNow').addEventListener('click',async()=>{
+      await Promise.all([...preview.document.images].map(image=>image.decode().catch(()=>{})));
+      preview.focus();preview.print();
+    });
+    setStatus('PDF preview ready. Choose Print / Save as PDF in the preview tab, then select Save as PDF or a printer.');
+  }catch(error){if(!preview.closed)preview.close();setStatus(`PDF preview failed: ${error.message}`)}finally{setBusy(false)}
+}
+
 async function exportEmails(format) {
   if(busy||!selectedMessages.size)return;setBusy(true);
   try {
@@ -404,6 +433,8 @@ function init() {
   };
   $('deleteMode').addEventListener('change',updateSelectionCount);
   $('exportMessages').onclick=()=>exportAttachments(true);$('exportAttachments').onclick=()=>exportAttachments(false);
+  $('exportPdf').onclick=()=>openPdfOptions();$('printCurrent').onclick=()=>openPdfOptions(true);
+  $('pdfPreview').onclick=previewPdf;$('pdfCancel').onclick=()=>$('pdfDialog').close();
   $('exportEml').onclick=()=>exportEmails('eml');$('exportMbox').onclick=()=>exportEmails('mbox');
   $('textTab').onclick=()=>setView(false);$('htmlTab').onclick=()=>setView(true);
   $('previewClose').onclick=()=>$('previewDialog').close();$('previewDialog').addEventListener('close',()=>{previewRequest++;$('previewContent').replaceChildren()});
