@@ -1,4 +1,6 @@
-# Verification — September 29, 2026
+<a id="verification-september-29-2026"></a><a id="verification--september-29-2026"></a>
+
+# Verification
 
 - All 13 curated launch destinations returned HTTP 200.
 - Public repository inventory matched all 13 entries; archived repositories excluded.
