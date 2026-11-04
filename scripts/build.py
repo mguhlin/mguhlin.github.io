@@ -59,7 +59,7 @@ html = f'''<!doctype html>
     <p class="hero-intro">Tools to make something. Resources to learn something. A few worlds to get lost in. Explore what I’m building at the intersection of education, technology, and play.</p>
     <div class="hero-actions"><a class="button" href="#projects">Explore the collection <span aria-hidden="true">↓</span></a><a class="text-link" href="https://mguhlin.org/about/">Meet Miguel <span class="arrow" aria-hidden="true">↗</span></a></div>
   </div><figure class="hero-art"><img src="assets/images/workspace.webp" width="1500" height="1000" fetchpriority="high" alt="AI-generated photograph of a sunlit desk with a sketchbook, navy notebook, laptop, and coffee."><figcaption>From “what if?” to something you can use.</figcaption></figure></div>
-  <div class="collection-meta"><div class="meta-left"><span><strong>{len(projects)} projects</strong> to explore</span><span>Tools, learning & play</span><span>By Miguel Guhlin</span></div><span class="meta-right"><span class="status-dot" aria-hidden="true"></span>Links checked <time datetime="2026-09-29">September 2026</time></span></div>
+  <div class="collection-meta"><div class="meta-left"><span><strong>{len(projects)} projects</strong> to explore</span><span>Tools, learning & play</span><span>By Miguel Guhlin</span></div></div>
 </section>
 <section id="projects" class="directory wrap" aria-labelledby="projects-title">
   <div class="section-heading"><div><h2 id="projects-title">Find your next discovery.</h2><p>Pick a starting point. Follow your curiosity.</p></div><span id="result-count" class="directory-count" role="status" aria-live="polite">{len(projects)} of {len(projects)} projects</span></div>

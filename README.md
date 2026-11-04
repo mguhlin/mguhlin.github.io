@@ -25,4 +25,4 @@ relicense their content or artwork.
 
 ## Postbox
 
-[Download Postbox for Windows or Linux](https://mguhlin.github.io/postbox/) — Miguel Guhlin’s portable offline email viewer for EML and MBOX exports, with search, attachment previews, and bulk organization. [README and source](postbox/README.md).
+[Download Postbox for Windows or Linux](https://mguhlin.github.io/postbox/) — Miguel Guhlin’s portable offline email viewer for EML and MBOX exports, with search, attachment previews, and bulk organization. [README and source](https://github.com/mguhlin/postbox). Postbox is maintained and published from its own repository; its public URL and download paths are unchanged.

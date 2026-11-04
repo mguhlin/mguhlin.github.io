@@ -3,7 +3,7 @@
 ## Original generated image
 
 `assets/images/workspace.webp` was generated with the built-in image-generation
-tool on September 29, 2026, then resized and encoded as WebP for the site. It is an
+tool, then resized and encoded as WebP for the site. It is an
 illustrative scene, not a photograph of Miguel's actual workspace. Its alt text
 and the site footer identify the use of generated imagery.
 
@@ -44,6 +44,7 @@ WebP. Their original project licenses and provenance continue to apply.
 | creations.webp | Browser capture of mguhlin.github.io/creations/ |
 | funquiz.webp | Browser capture of mguhlin.github.io/funquiz/ |
 | prototype.webp | Browser capture of mguhlin.github.io/dev/ |
+| postbox.webp | postbox/assets/hero-purple.png |
 
 The NSPA photography is illustrative, not a claim that the pictured people are
 actual participants or users of the linked resources. Card images are decorative;

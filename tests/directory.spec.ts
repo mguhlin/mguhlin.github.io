@@ -32,9 +32,9 @@ test('search and category filters combine, reset, and survive reload', async ({ 
   await expect(page.locator('.project-card:visible')).toHaveCount(2);
   await page.getByRole('searchbox').fill('no-match-xyz');
   await expect(page.getByRole('heading', {name:'No projects found.'})).toBeVisible();
-  await expect(page.getByRole('status')).toHaveText('0 of 13 projects');
+  await expect(page.getByRole('status')).toHaveText(`0 of ${projects.length} projects`);
   await page.getByRole('button', {name:'Clear search & filters'}).click();
-  await expect(page.locator('.project-card:visible')).toHaveCount(13);
+  await expect(page.locator('.project-card:visible')).toHaveCount(projects.length);
   await expect(page.getByRole('searchbox')).toBeFocused();
 });
 
@@ -46,7 +46,7 @@ test('alphabetical order and query parameters are applied consistently', async (
   await page.getByLabel('Sort by').selectOption('featured');
   await expect(page.locator('.project-card:visible h3').first()).toHaveText('Prospect 47');
   await page.goto('./?q=%3Cscript%3E&category=invalid');
-  await expect(page.getByRole('status')).toHaveText('0 of 13 projects');
+  await expect(page.getByRole('status')).toHaveText(`0 of ${projects.length} projects`);
   await expect(page.getByRole('button', {name:'All projects', exact:true})).toHaveAttribute('aria-pressed','true');
 });
 
@@ -67,7 +67,7 @@ test('the directory and all launch links work without JavaScript', async ({ brow
   const context = await browser.newContext({javaScriptEnabled:false});
   const page = await context.newPage();
   await page.goto(baseURL!);
-  await expect(page.locator('.project-card')).toHaveCount(13);
+  await expect(page.locator('.project-card')).toHaveCount(projects.length);
   await expect(page.locator('#directory-controls')).toBeHidden();
   await expect(page.getByRole('link', {name:'Open DrawSplat',exact:true})).toHaveAttribute('href','https://drawsplat.org/');
   await context.close();

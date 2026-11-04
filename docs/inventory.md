@@ -1,16 +1,17 @@
 # Directory inventory
 
-Reviewed September 29, 2026 using the GitHub public repositories API and live sites.
+This directory uses the GitHub public repositories API and live sites to identify published projects.
 
 Inclusion: public, non-archived `mguhlin` repositories with GitHub Pages enabled,
 excluding this directory itself. This means “active” is a repository/publication
 status, not a claim that each project is frequently updated or production software.
-There are 13 entries. Each card identifies its source repository.
+There are 14 entries. Each card identifies its source repository.
 
 - **DrawSplat:** launches the working canonical custom domain, drawsplat.org.
 - **Creations:** the wider original collection at `/creations/`.
 - **Contraband:** book learning rooms at `/contraband/`.
 - **NSPA:** current combined AI and scholarship resource collection at `/nspa/`.
+- **Postbox:** standalone offline email viewer and portable downloads at `/postbox/`.
 - **GridSplat:** standalone spreadsheet at `/gridsplat/`.
 - **Prospect 47:** sandbox game at `/Prospect47/` (preserve capitalization).
 - **Dungeon Run:** game at `/dungeonrun/`.
@@ -29,4 +30,4 @@ through its own directory, rather than being duplicated as top-level repositorie
 
 `data/repositories-snapshot.json` preserves the repository metadata used for this
 review. Run `scripts/check-inventory.py` before future updates, verify moved
-locations, then review and edit `data/projects.json` and the visible checked date.
+locations, then review and edit `data/projects.json`.
