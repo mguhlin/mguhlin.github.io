@@ -56,10 +56,9 @@ test('layouts stay within the viewport and interactive controls remain reachable
     await page.goto('./');
     await expect(page.getByRole('heading', {level:1})).toBeVisible();
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
-    await page.getByRole('button', {name:'Experiments', exact:true}).click();
-    await expect(page.locator('.project-card:visible')).toHaveCount(1);
-    await expect(page.getByRole('link', {name:'Open Website Design Study',exact:true})).toBeVisible();
-    await expect(page.getByText('Unofficial concept', {exact:true})).toBeVisible();
+    await page.getByRole('button', {name:'Tools & collections', exact:true}).click();
+    await expect(page.locator('.project-card:visible')).toHaveCount(4);
+    await expect(page.getByRole('link', {name:'Open Postbox',exact:true})).toBeVisible();
   }
 });
 

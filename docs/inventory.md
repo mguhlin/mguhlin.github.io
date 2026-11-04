@@ -5,7 +5,7 @@ This directory uses the GitHub public repositories API and live sites to identif
 Inclusion: public, non-archived `mguhlin` repositories with GitHub Pages enabled,
 excluding this directory itself. This means “active” is a repository/publication
 status, not a claim that each project is frequently updated or production software.
-There are 14 entries. Each card identifies its source repository.
+There are 13 entries. Each card identifies its source repository.
 
 - **DrawSplat:** launches the working canonical custom domain, drawsplat.org.
 - **Creations:** the wider original collection at `/creations/`.
@@ -21,7 +21,9 @@ There are 14 entries. Each card identifies its source repository.
 - **Coaching with UDL:** `/cudl/` redirects to `/creations/cudl/`; linked directly.
 - **Emotional Intelligence:** self-assessment at `/eisa26/`.
 - **Character Quizzes:** quiz collection entry point at `/funquiz/`.
-- **Website Design Study:** `/dev/`, explicitly labeled an unofficial prototype.
+
+Website Design Study (`/dev/`) is excluded from this directory at the owner's
+request. Its site and repository remain available.
 
 Excluded archived repositories: `nspaaifluency`, `nspa3`, `vlet`, `aici`, `acl`,
 `architect`, `eog`. `mgblog` has no GitHub Pages site; the current blog is linked
