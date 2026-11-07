@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#edf5ff">
+  <title>PBL Wordle | Think it. Connect it. Play it.</title>
+  <meta name="description" content="A playful classroom word game based on Miguel Guhlin’s Pedagogy Showcase. Explore learning phases, SOLO, critical thinking, and project design, one word at a time.">
+  <link rel="canonical" href="https://mguhlin.github.io/games/pblwordle/">
+  <meta property="og:title" content="PBL Wordle: big ideas, one word at a time">
+  <meta property="og:description" content="Six guesses. A classroom full of ideas. Play the Pedagogy Showcase word challenge.">
+  <meta property="og:image" content="https://mguhlin.github.io/games/pblwordle/assets/word-island.webp">
+  <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg">
+  <link rel="stylesheet" href="./styles.css">
+  <script type="module" src="./app.mjs"></script>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+  <header class="site-header">
+    <button class="brand" id="home-button" aria-label="PBL Wordle home"><span class="brand-mark" aria-hidden="true"><i>P</i><i>B</i><i>L</i></span><span>Wordle<span class="brand-sub">Pedagogy Showcase</span></span></button>
+    <nav aria-label="Game controls">
+      <button class="quiet" id="contrast-button" aria-pressed="false">Contrast</button>
+      <button class="quiet" id="help-button">How to play</button>
+      <button class="small-button" id="teacher-button">Teacher setup</button>
+    </nav>
+  </header>
+  <main id="main" tabindex="-1">
+    <section id="splash" aria-labelledby="splash-title">
+      <div class="splash-grid">
+        <div class="splash-copy">
+          <p class="intro-tag"><span aria-hidden="true">✦</span> A little wordplay. A lot of thinking.</p>
+          <h1 id="splash-title">Big ideas.<br>One word<br>at a time.</h1>
+          <p class="splash-description">Crack the words behind powerful learning. Six guesses, a few clues, and plenty of “aha!” moments.</p>
+          <p id="session-description" class="session-description">32 ideas from the Pedagogy Showcase. Play solo or think together as a class.</p>
+          <div class="start-actions"><button class="primary" id="play-button">Let’s play <span aria-hidden="true">▶</span></button><button id="resume-button" class="secondary" hidden>Continue session</button></div>
+          <p class="play-note" id="play-note">A quick mix of 5 words. No timer. Room to think.</p>
+        </div>
+        <figure class="splash-art"><img src="./assets/word-island.webp" width="1200" height="800" alt="Two curious explorers connect puzzle pieces on a colorful PBL island, with a magnifying glass, lightbulb, and rocket."><figcaption>Think it. Connect it. Play it.</figcaption></figure>
+      </div>
+      <div class="learning-strip" aria-label="Our learning journey"><div><span class="journey-icon surface" aria-hidden="true">✦</span><p><strong>Build your knowledge</strong>Recall the big ideas.</p></div><div><span class="journey-icon deep" aria-hidden="true">⌘</span><p><strong>Make connections</strong>Use clues and evidence.</p></div><div><span class="journey-icon transfer" aria-hidden="true">↗</span><p><strong>Take it further</strong>Try an idea in your classroom.</p></div></div>
+    </section>
+
+    <section id="game" hidden aria-labelledby="game-title">
+      <div class="game-top"><div><h1 id="game-title">Let’s think this through.</h1><p id="game-topic"></p></div><button class="quiet" id="projector-button" aria-pressed="false">Projector view</button></div>
+      <div class="session-bar"><span id="progress">Word 1 of 5</span><div class="progress-track" aria-hidden="true"><span id="progress-fill"></span></div><span id="score">0 points</span></div>
+      <div class="game-layout">
+        <div class="board-column">
+          <h2 class="sr-only">Guess the word</h2>
+          <p class="word-details" id="word-details"></p>
+          <div id="board" class="board" role="group" aria-label="Six-guess word board"></div>
+          <p id="feedback" class="feedback" role="status" aria-live="polite" aria-atomic="true"></p>
+          <div id="keyboard" class="keyboard" role="group" aria-label="Letter keyboard"></div>
+          <div class="tile-legend"><span><b class="legend-dot correct">✓</b>Right spot</span><span><b class="legend-dot present">↔</b>Move it</span><span><b class="legend-dot absent">×</b>Not here</span></div>
+          <div id="round-actions" class="round-actions" hidden><button class="primary" id="next-button">Next word</button></div>
+        </div>
+        <aside class="clue-card" aria-labelledby="clue-title">
+          <div class="clue-label"><span aria-hidden="true">✧</span><h2 id="clue-title">Your thinking clue</h2></div>
+          <p id="clue-text"></p>
+          <button class="clue-button" id="hint-button">Show a hint</button>
+          <p class="extra-hint" id="extra-hint" hidden></p>
+          <div id="learning-reveal" class="learning-reveal" hidden><p id="round-result" class="round-result"></p><h3 id="answer-word"></h3><p id="answer-explanation"></p><p class="source" id="answer-source"></p><div class="discuss"><h3>Take it into your classroom</h3><p id="discussion-question"></p></div></div>
+          <p class="clue-footnote" id="clue-footnote">Talk it out. A good guess begins with a reason.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section id="summary" class="summary" hidden aria-labelledby="summary-title"><span class="summary-star" aria-hidden="true">✦</span><h1 id="summary-title">Look at all those connections!</h1><p id="summary-message"></p><div class="summary-metrics"><div><strong id="summary-solved"></strong><span>words solved</span></div><div><strong id="summary-points"></strong><span>points earned</span></div></div><div class="summary-actions"><button class="primary" id="again-button">Play another mix</button><button class="secondary" id="copy-results-button">Copy results</button></div><p id="copy-results-status" role="status"></p><details class="word-review"><summary>Revisit the ideas you explored</summary><div id="review-list"></div></details><p class="summary-reflection">One last question: which idea will you try in your next lesson?</p><button class="quiet" id="summary-home-button">Back to the splash page</button></section>
+    <noscript><p class="noscript">Please enable JavaScript to play PBL Wordle. No sign-in or download is needed.</p></noscript>
+  </main>
+  <footer class="site-footer"><p>Made for curious classrooms by <a href="https://mguhlin.org/">Miguel Guhlin</a>.</p><button id="about-button">About the words</button><a href="https://mguhlin.github.io/">More creations</a></footer>
+
+  <dialog id="help-dialog" aria-labelledby="help-title"><div class="dialog-top"><h2 id="help-title">A word game with a thinking twist.</h2><button class="close" data-close aria-label="Close how to play">×</button></div><p>Find the session word in <strong>six guesses</strong>. Each round can have a different word length. Use your keyboard or tap the letters, then choose Enter.</p><div class="help-examples"><div><span class="tile correct">A<small>✓</small></span><p><strong>Right spot.</strong> Keep this letter here.</p></div><div><span class="tile present">B<small>↔</small></span><p><strong>Move it.</strong> The word has this letter, somewhere else.</p></div><div><span class="tile absent">C<small>×</small></span><p><strong>Not here.</strong> There is no unmatched copy of this letter.</p></div></div><p>Repeated letters count separately. A word can have one E or more than one. Use the clue and the number of spaces; the game accepts letter combinations and session acronyms, without a dictionary check.</p><p>Hints are free. Solve a word in one guess for 60 points, or in six for 10. There’s no timer and no penalty for talking it through.</p><p>After each round, connect the word back to the slides and consider the classroom question.</p><button class="primary" data-close>Got it. Let’s think!</button></dialog>
+
+  <dialog id="teacher-dialog" aria-labelledby="teacher-title"><div class="dialog-top"><div><h2 id="teacher-title">Make it your class’s game.</h2><p>Choose a word set, then play together or share a pupil link.</p></div><button class="close" data-close aria-label="Close teacher setup">×</button></div><form id="teacher-form"><label for="topic-select">Word set</label><select id="topic-select"><option value="all">The whole showcase (32 words)</option><option value="learning">Learning phases & SOLO (9 words)</option><option value="thinking">Critical thinking & CLEAR (10 words)</option><option value="projects">Projects & teaching strategies (8 words)</option><option value="ai">AI as a planning partner (5 words)</option></select><label for="round-count">Session length</label><select id="round-count"><option value="5">5 words</option><option value="10">10 words</option><option value="all">All words in this set</option></select><p class="field-note">If the set is smaller, every word in it is included.</p><label class="check-label"><input type="checkbox" id="clues-checkbox" checked>Show the thinking clue from the start</label><details class="custom-settings"><summary>Use your own words instead</summary><label for="custom-words">Custom words</label><textarea id="custom-words" rows="3" placeholder="EVIDENCE, TRANSFER, REFLECT"></textarea><p class="field-note">Optional. Up to 20 words, 4–12 letters each. Separate with commas or spaces. Known showcase words keep their slide clues; other words use a general clue.</p></details><p id="teacher-status" class="form-status" role="status"></p><div class="teacher-actions"><button class="primary" type="submit">Start this session</button><button class="secondary" type="button" id="create-link-button">Create pupil link</button></div><div id="share-link-panel" hidden><label for="pupil-link">Pupil link</label><input id="pupil-link" type="text" readonly><button class="small-button" type="button" id="copy-link-button">Copy link</button><p class="field-note">Everyone with this link gets the same words in the same order. Teacher controls are hidden in pupil view.</p><p id="copy-link-status" role="status"></p></div></form></dialog>
+
+  <dialog id="about-dialog" aria-labelledby="about-title"><div class="dialog-top"><h2 id="about-title">From the slides to the word board.</h2><button class="close" data-close aria-label="Close about the words">×</button></div><p>The 32 built-in words, clues, and learning connections come from the visible slides of Miguel Guhlin’s <cite>Pedagogy Showcase: PBL for Critical Thinking—Designing Projects That Outsmart AI Shortcuts</cite>. Speaker’s notes were not used.</p><p>The game includes learning phases, SOLO, ACE, CLEAR, problem-solving teaching, and AI-supported instructional design. Slide references appear after each round.</p><p>Clues and discussion questions are learning aids adapted for this game. They do not replace the presentation or reproduce every slide.</p><p>Inspired by the classroom-friendly format of <a href="https://classroomwordle.apphive.us/" target="_blank" rel="noopener noreferrer">Classroom Wordle</a>. This is an independent game with original code and artwork, not an affiliated product.</p><p>Progress stays in this browser. No accounts, advertising, tracking, or student names. Teacher-created custom words are separate from the built-in slide vocabulary.</p><button class="primary" data-close>Back to the game</button></dialog>
+  <div id="celebration" class="celebration" aria-hidden="true"></div>
+</body>
+</html>
