@@ -2,6 +2,18 @@ import { test, expect } from '@playwright/test';
 import { readFileSync } from 'node:fs';
 const projects = JSON.parse(readFileSync(new URL('../data/projects.json', import.meta.url), 'utf8'));
 
+test('every listed project is searchable by name and the owner exclusion stays absent', async ({ page }) => {
+  await page.goto('./');
+  for (const project of projects) {
+    await page.getByRole('searchbox', {name: 'Search projects'}).fill(project.name);
+    await expect(page.getByRole('link', {name: `Open ${project.name}`, exact: true})).toBeVisible();
+  }
+  await page.goto('./?q=PBL+Wordle');
+  await expect(page.locator('.project-card:visible')).toHaveCount(1);
+  await expect(page.getByRole('link', {name: 'Open PBL Wordle', exact: true})).toHaveAttribute('href', 'https://mguhlin.github.io/games/pblwordle/');
+  await expect(page.locator('a[href="https://mguhlin.github.io/dev/"]')).toHaveCount(0);
+});
+
 test('all reviewed projects, images, and launch links render without errors', async ({ page }) => {
   const errors: string[] = [];
   const external: string[] = [];
@@ -12,7 +24,7 @@ test('all reviewed projects, images, and launch links render without errors', as
   await expect(page.locator('.project-card')).toHaveCount(projects.length);
   for (const project of projects) {
     await expect(page.getByRole('link', {name: `Open ${project.name}`, exact: true})).toHaveAttribute('href', project.url);
-    await expect(page.getByRole('link', {name: `${project.name} source on GitHub`, exact: true})).toHaveAttribute('href', `https://github.com/mguhlin/${project.repo}`);
+    await expect(page.getByRole('link', {name: `${project.name} source on GitHub`, exact: true})).toHaveAttribute('href', project.source_url || `https://github.com/mguhlin/${project.repo}`);
   }
   await page.locator('img').evaluateAll(images => images.forEach(image => image.loading = 'eager'));
   await expect.poll(() => page.locator('img').evaluateAll(images => images.every(image => image.complete && image.naturalWidth > 0))).toBe(true);
@@ -23,7 +35,7 @@ test('all reviewed projects, images, and launch links render without errors', as
 test('search and category filters combine, reset, and survive reload', async ({ page }) => {
   await page.goto('./');
   await page.getByRole('button', {name: 'Learning', exact: true}).click();
-  await expect(page.locator('.project-card:visible')).toHaveCount(5);
+  await expect(page.locator('.project-card:visible')).toHaveCount(projects.filter(p => p.category === 'Learning').length);
   await page.getByRole('searchbox', {name:'Search projects'}).fill('coaching');
   await expect(page.locator('.project-card:visible')).toHaveCount(2);
   await expect(page).toHaveURL(/q=coaching/);
@@ -40,7 +52,7 @@ test('search and category filters combine, reset, and survive reload', async ({ 
 
 test('alphabetical order and query parameters are applied consistently', async ({ page }) => {
   await page.goto('./?category=Play+%26+explore&sort=az');
-  await expect(page.locator('.project-card:visible')).toHaveCount(4);
+  await expect(page.locator('.project-card:visible')).toHaveCount(projects.filter(p => p.category === 'Play & explore').length);
   const names = await page.locator('.project-card:visible h3').allTextContents();
   expect(names).toEqual([...names].sort((a,b) => a.localeCompare(b)));
   await page.getByLabel('Sort by').selectOption('featured');
@@ -57,7 +69,7 @@ test('layouts stay within the viewport and interactive controls remain reachable
     await expect(page.getByRole('heading', {level:1})).toBeVisible();
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth)).toBe(true);
     await page.getByRole('button', {name:'Tools & collections', exact:true}).click();
-    await expect(page.locator('.project-card:visible')).toHaveCount(4);
+    await expect(page.locator('.project-card:visible')).toHaveCount(projects.filter(p => p.category === 'Tools & collections').length);
     await expect(page.getByRole('link', {name:'Open Postbox',exact:true})).toBeVisible();
   }
 });

@@ -4,110 +4,11 @@
     {
       "archived": false,
       "default_branch": "main",
-      "description": "DrawSplat is an interactive whiteboard solution that supports multiple languages, offers a variety of features and is intended for K-16 education or productivity enhancement.",
+      "description": "ACE It: three learning checkpoints, an assignment builder, and a guide grounded in SOLO and evidence-informed instruction.",
       "fork": false,
       "has_pages": true,
       "homepage": null,
-      "name": "drawsplat"
-    },
-    {
-      "archived": false,
-      "default_branch": "main",
-      "description": "Contraband \u2014 banned/challenged-book learning rooms. \u00a9 Miguel Guhlin, CC BY-NC 4.0.",
-      "fork": false,
-      "has_pages": true,
-      "homepage": null,
-      "name": "contraband"
-    },
-    {
-      "archived": false,
-      "default_branch": "main",
-      "description": "Miguel Guhlin\u2019s NSPA conference materials, AI guides, assessments, and scholarship resources",
-      "fork": false,
-      "has_pages": true,
-      "homepage": null,
-      "name": "nspa"
-    },
-    {
-      "archived": true,
-      "default_branch": "main",
-      "description": "NSPA AI Fluency Self-Assessment",
-      "fork": false,
-      "has_pages": true,
-      "homepage": null,
-      "name": "nspaaifluency"
-    },
-    {
-      "archived": true,
-      "default_branch": "main",
-      "description": "Automating Office Tasks with AI",
-      "fork": false,
-      "has_pages": true,
-      "homepage": null,
-      "name": "nspa3"
-    },
-    {
-      "archived": false,
-      "default_branch": "main",
-      "description": "creations with Gen AI tools",
-      "fork": false,
-      "has_pages": true,
-      "homepage": null,
-      "name": "creations"
-    },
-    {
-      "archived": false,
-      "default_branch": "main",
-      "description": "Browser-first asteroid mining and colony-building game on a WebAssembly Luanti engine. Dig. Craft. Build. Prepare for Tomorrow.",
-      "fork": false,
-      "has_pages": true,
-      "homepage": null,
-      "name": "Prospect47"
-    },
-    {
-      "archived": false,
-      "default_branch": "main",
-      "description": "An interactive journey through the unfinished history of voting rights",
-      "fork": false,
-      "has_pages": true,
-      "homepage": null,
-      "name": "sojourn"
-    },
-    {
-      "archived": false,
-      "default_branch": "main",
-      "description": "An original browser-based LitRPG action dungeon crawler starring three sawmill foremen and Moxie the standard poodle.",
-      "fork": false,
-      "has_pages": true,
-      "homepage": null,
-      "name": "dungeonrun"
-    },
-    {
-      "archived": false,
-      "default_branch": "main",
-      "description": null,
-      "fork": false,
-      "has_pages": true,
-      "homepage": "https://mguhlin.github.io/gridsplat/",
-      "name": "gridsplat"
-    },
-    {
-      "archived": true,
-      "default_branch": "main",
-      "description": "Visible Learning",
-      "fork": false,
-      "has_pages": true,
-      "homepage": null,
-      "name": "vlet"
-    },
-    {
-      "archived": true,
-      "default_branch": "main",
-      "description": "AI Custom Instructions",
-      "fork": false,
-      "has_pages": true,
-      "homepage": null,
-      "name": "aici"
+      "name": "ace"
     },
     {
       "archived": true,
@@ -121,6 +22,15 @@
     {
       "archived": true,
       "default_branch": "main",
+      "description": "AI Custom Instructions",
+      "fork": false,
+      "has_pages": true,
+      "homepage": null,
+      "name": "aici"
+    },
+    {
+      "archived": true,
+      "default_branch": "main",
       "description": "AI Prompt Architect",
       "fork": false,
       "has_pages": true,
@@ -128,13 +38,22 @@
       "name": "architect"
     },
     {
-      "archived": true,
+      "archived": false,
       "default_branch": "main",
-      "description": "Employee Onboarding Guide",
+      "description": "Contraband — banned/challenged-book learning rooms. © Miguel Guhlin, CC BY-NC 4.0.",
       "fork": false,
       "has_pages": true,
       "homepage": null,
-      "name": "eog"
+      "name": "contraband"
+    },
+    {
+      "archived": false,
+      "default_branch": "main",
+      "description": "creations with Gen AI tools",
+      "fork": false,
+      "has_pages": true,
+      "homepage": null,
+      "name": "creations"
     },
     {
       "archived": false,
@@ -157,11 +76,38 @@
     {
       "archived": false,
       "default_branch": "main",
-      "description": "Another Think Coming - mgblog.org",
+      "description": "SplatWorks is a browser-based ecosystem for K-16 learning and productivity: the DrawSplat whiteboard, office apps, media editors, creation and assessment tools, classroom widgets, and games, with multilingual support and local file workflows.",
       "fork": false,
-      "has_pages": false,
+      "has_pages": true,
+      "homepage": "https://splatworks.org",
+      "name": "drawsplat"
+    },
+    {
+      "archived": false,
+      "default_branch": "main",
+      "description": "An original browser-based LitRPG action dungeon crawler starring three sawmill foremen and Moxie the standard poodle.",
+      "fork": false,
+      "has_pages": true,
       "homepage": null,
-      "name": "mgblog"
+      "name": "dungeonrun"
+    },
+    {
+      "archived": false,
+      "default_branch": "main",
+      "description": "An Emotional Intelligence Self-Assessment",
+      "fork": false,
+      "has_pages": true,
+      "homepage": null,
+      "name": "eisa26"
+    },
+    {
+      "archived": true,
+      "default_branch": "main",
+      "description": "Employee Onboarding Guide",
+      "fork": false,
+      "has_pages": true,
+      "homepage": null,
+      "name": "eog"
     },
     {
       "archived": false,
@@ -175,6 +121,33 @@
     {
       "archived": false,
       "default_branch": "main",
+      "description": null,
+      "fork": false,
+      "has_pages": true,
+      "homepage": "https://mguhlin.github.io/gridsplat/",
+      "name": "gridsplat"
+    },
+    {
+      "archived": false,
+      "default_branch": "main",
+      "description": "History and Social Studies Learning Center: classroom inquiry, daily openers, printables, and multilingual learning supports",
+      "fork": false,
+      "has_pages": true,
+      "homepage": null,
+      "name": "hlc"
+    },
+    {
+      "archived": false,
+      "default_branch": "main",
+      "description": "Miguel Guhlin's creations: browser tools, learning resources, games, and experiments.",
+      "fork": false,
+      "has_pages": true,
+      "homepage": null,
+      "name": "mguhlin.github.io"
+    },
+    {
+      "archived": false,
+      "default_branch": "main",
       "description": "Navigating Difficult Coaching Conversations with Confidence Scenarios",
       "fork": false,
       "has_pages": true,
@@ -184,11 +157,29 @@
     {
       "archived": false,
       "default_branch": "main",
-      "description": "An Emotional Intelligence Self-Assessment",
+      "description": "Miguel Guhlin’s NSPA conference materials, AI guides, assessments, and scholarship resources",
       "fork": false,
       "has_pages": true,
       "homepage": null,
-      "name": "eisa26"
+      "name": "nspa"
+    },
+    {
+      "archived": true,
+      "default_branch": "main",
+      "description": "Automating Office Tasks with AI",
+      "fork": false,
+      "has_pages": true,
+      "homepage": null,
+      "name": "nspa3"
+    },
+    {
+      "archived": true,
+      "default_branch": "main",
+      "description": "NSPA AI Fluency Self-Assessment",
+      "fork": false,
+      "has_pages": true,
+      "homepage": null,
+      "name": "nspaaifluency"
     },
     {
       "archived": false,
@@ -198,6 +189,69 @@
       "has_pages": true,
       "homepage": "https://mguhlin.github.io/postbox/",
       "name": "postbox"
+    },
+    {
+      "archived": false,
+      "default_branch": "main",
+      "description": "Browser-first asteroid mining and colony-building game on a WebAssembly Luanti engine. Dig. Craft. Build. Prepare for Tomorrow.",
+      "fork": false,
+      "has_pages": true,
+      "homepage": null,
+      "name": "Prospect47"
+    },
+    {
+      "archived": false,
+      "default_branch": "main",
+      "description": "Sapiqo LMS — a self-hosted PHP learning management system. © 2026 Miguel Guhlin, CC BY-SA 4.0.",
+      "fork": false,
+      "has_pages": true,
+      "homepage": "https://mguhlin.github.io/sapiqolms/",
+      "name": "sapiqolms"
+    },
+    {
+      "archived": false,
+      "default_branch": "main",
+      "description": null,
+      "fork": false,
+      "has_pages": true,
+      "homepage": null,
+      "name": "slc"
+    },
+    {
+      "archived": false,
+      "default_branch": "main",
+      "description": "An interactive journey through the unfinished history of voting rights",
+      "fork": false,
+      "has_pages": true,
+      "homepage": null,
+      "name": "sojourn"
+    },
+    {
+      "archived": false,
+      "default_branch": "main",
+      "description": "SplatLMS: the SplatWorks learning management system, with SplatWorks Educator as its first course.",
+      "fork": false,
+      "has_pages": true,
+      "homepage": null,
+      "name": "splatlms"
+    },
+    {
+      "archived": true,
+      "default_branch": "main",
+      "description": "Visible Learning",
+      "fork": false,
+      "has_pages": true,
+      "homepage": null,
+      "name": "vlet"
+    },
+    {
+      "archived": false,
+      "default_branch": "main",
+      "description": "Web Deck v5 — self-contained HTML slide decks: spec, framework, template, and a chatbot-ready standalone. MIT.",
+      "fork": false,
+      "has_pages": true,
+      "homepage": null,
+      "name": "webdecks"
     }
   ]
 }

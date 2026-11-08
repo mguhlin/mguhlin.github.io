@@ -1,15 +1,279 @@
 [
-  {"repo":"drawsplat","name":"DrawSplat","category":"Tools & collections","eyebrow":"A creative workspace","description":"Whiteboards, video and audio editing, documents, diagrams, and classroom tools. A growing collection built around creating in your browser.","url":"https://drawsplat.org/","image":"drawsplat.webp","tags":["Create","Media","Classroom"],"featured":true},
-  {"repo":"creations","name":"Creations","category":"Tools & collections","eyebrow":"The wider collection","description":"Explore the original collection of AI-assisted creations: practical tools, workshop resources, prompt builders, and small experiments worth trying.","url":"https://mguhlin.github.io/creations/","image":"creations.webp","tags":["Directory","AI","Resources"],"featured":true},
-  {"repo":"contraband","name":"Contraband","category":"Learning","eyebrow":"The freedom to read","description":"Learning rooms built around banned and challenged books. Explore literature, identity, history, and the questions that deserve a conversation.","url":"https://mguhlin.github.io/contraband/","image":"contraband.webp","tags":["Literature","Grades 6–12"],"featured":true},
-  {"repo":"nspa","name":"AI & Scholarship Resources","category":"Learning","eyebrow":"NSPA conference collection","description":"Conference sessions, AI guides, assessments, and practical resources for scholarship professionals considering how to use AI responsibly.","url":"https://mguhlin.github.io/nspa/","image":"nspa.webp","tags":["Professional learning","AI"]},
-  {"repo":"postbox","name":"Postbox","category":"Tools & collections","eyebrow":"Your archive, close at hand","description":"Read and search exported email offline. Open EML, MSG, MBOX, and PST files, preview attachments, and organize your archive with portable Windows and Linux downloads.","url":"https://mguhlin.github.io/postbox/","image":"postbox.webp","tags":["Email archives","Offline","Windows & Linux"]},
-  {"repo":"gridsplat","name":"GridSplat","category":"Tools & collections","eyebrow":"Make sense of data","description":"A student-friendly spreadsheet for sorting data, using formulas, building charts, and exploring classroom activities.","url":"https://mguhlin.github.io/gridsplat/","image":"gridsplat.webp","tags":["Spreadsheets","Grades 3–8"]},
-  {"repo":"Prospect47","name":"Prospect 47","category":"Play & explore","eyebrow":"Dig. Craft. Build.","description":"An asteroid-mining and colony-building adventure. Gather resources, build a habitat, and prepare a small world for tomorrow.","url":"https://mguhlin.github.io/Prospect47/","image":"prospect47.webp","tags":["Sandbox","Browser game"]},
-  {"repo":"dungeonrun","name":"Dungeon Run","category":"Play & explore","eyebrow":"An unlikely adventuring party","description":"Three sawmill foremen and Moxie the standard poodle take on an original LitRPG action dungeon crawler.","url":"https://mguhlin.github.io/dungeonrun/","image":"dungeonrun.webp","tags":["Adventure","Browser game"]},
-  {"repo":"sojourn","name":"Suffrage Sojourn","category":"Play & explore","eyebrow":"Explore the unfinished story","description":"An interactive journey through five turning points in voting rights, with primary sources and a teacher mode. Now hosted at mglearn.","url":"https://mglearn.github.io/sojourn/","image":"sojourn.webp","tags":["History","Interactive journey"],"note":"New home · mglearn"},
-  {"repo":"ndc","name":"Difficult Conversations","category":"Learning","eyebrow":"Practice the conversation","description":"Work through coaching scenarios using the Acknowledge, Reframe, Commit framework. Make space for a more productive next conversation.","url":"https://mguhlin.github.io/ndc/","image":"conversation.webp","tags":["Coaching","Scenarios"]},
-  {"repo":"cudl","name":"Coaching with UDL","category":"Learning","eyebrow":"Design for every learner","description":"Coaching resources grounded in Universal Design for Learning. Explore ways to support learner variability and more inclusive instruction.","url":"https://mguhlin.github.io/creations/cudl/","image":"coaching.webp","tags":["Coaching","UDL"],"note":"Now in Creations"},
-  {"repo":"eisa26","name":"Emotional Intelligence","category":"Learning","eyebrow":"A moment for reflection","description":"A self-assessment for reflecting on emotional intelligence across key domains. Use your profile as a starting point for personal growth.","url":"https://mguhlin.github.io/eisa26/","image":"reflection.webp","tags":["Self-reflection","Assessment"]},
-  {"repo":"funquiz","name":"Character Quizzes","category":"Play & explore","eyebrow":"A lighter kind of discovery","description":"Playful personality quizzes inspired by familiar fictional characters, beginning with a Winnie the Pooh educator quiz.","url":"https://mguhlin.github.io/funquiz/","image":"funquiz.webp","tags":["Personality quizzes","Just for fun"]}
+  {
+    "repo": "drawsplat",
+    "name": "DrawSplat",
+    "category": "Tools & collections",
+    "eyebrow": "A creative workspace",
+    "description": "Whiteboards, video and audio editing, documents, diagrams, and classroom tools. A growing collection built around creating in your browser.",
+    "url": "https://drawsplat.org/",
+    "image": "drawsplat.webp",
+    "tags": [
+      "Create",
+      "Media",
+      "Classroom"
+    ],
+    "featured": true
+  },
+  {
+    "repo": "creations",
+    "name": "Creations",
+    "category": "Tools & collections",
+    "eyebrow": "The wider collection",
+    "description": "Explore the original collection of AI-assisted creations: practical tools, workshop resources, prompt builders, and small experiments worth trying.",
+    "url": "https://mguhlin.github.io/creations/",
+    "image": "creations.webp",
+    "tags": [
+      "Directory",
+      "AI",
+      "Resources"
+    ],
+    "featured": true
+  },
+  {
+    "repo": "contraband",
+    "name": "Contraband",
+    "category": "Learning",
+    "eyebrow": "The freedom to read",
+    "description": "Learning rooms built around banned and challenged books. Explore literature, identity, history, and the questions that deserve a conversation.",
+    "url": "https://mguhlin.github.io/contraband/",
+    "image": "contraband.webp",
+    "tags": [
+      "Literature",
+      "Grades 6–12"
+    ],
+    "featured": true
+  },
+  {
+    "repo": "nspa",
+    "name": "AI & Scholarship Resources",
+    "category": "Learning",
+    "eyebrow": "NSPA conference collection",
+    "description": "Conference sessions, AI guides, assessments, and practical resources for scholarship professionals considering how to use AI responsibly.",
+    "url": "https://mguhlin.github.io/nspa/",
+    "image": "nspa.webp",
+    "tags": [
+      "Professional learning",
+      "AI"
+    ]
+  },
+  {
+    "repo": "postbox",
+    "name": "Postbox",
+    "category": "Tools & collections",
+    "eyebrow": "Your archive, close at hand",
+    "description": "Read and search exported email offline. Open EML, MSG, MBOX, and PST files, preview attachments, and organize your archive with portable Windows and Linux downloads.",
+    "url": "https://mguhlin.github.io/postbox/",
+    "image": "postbox.webp",
+    "tags": [
+      "Email archives",
+      "Offline",
+      "Windows & Linux"
+    ]
+  },
+  {
+    "repo": "gridsplat",
+    "name": "GridSplat",
+    "category": "Tools & collections",
+    "eyebrow": "Make sense of data",
+    "description": "A student-friendly spreadsheet for sorting data, using formulas, building charts, and exploring classroom activities.",
+    "url": "https://mguhlin.github.io/gridsplat/",
+    "image": "gridsplat.webp",
+    "tags": [
+      "Spreadsheets",
+      "Grades 3–8"
+    ]
+  },
+  {
+    "repo": "Prospect47",
+    "name": "Prospect 47",
+    "category": "Play & explore",
+    "eyebrow": "Dig. Craft. Build.",
+    "description": "An asteroid-mining and colony-building adventure. Gather resources, build a habitat, and prepare a small world for tomorrow.",
+    "url": "https://mguhlin.github.io/Prospect47/",
+    "image": "prospect47.webp",
+    "tags": [
+      "Sandbox",
+      "Browser game"
+    ]
+  },
+  {
+    "repo": "dungeonrun",
+    "name": "Dungeon Run",
+    "category": "Play & explore",
+    "eyebrow": "An unlikely adventuring party",
+    "description": "Three sawmill foremen and Moxie the standard poodle take on an original LitRPG action dungeon crawler.",
+    "url": "https://mguhlin.github.io/dungeonrun/",
+    "image": "dungeonrun.webp",
+    "tags": [
+      "Adventure",
+      "Browser game"
+    ]
+  },
+  {
+    "repo": "sojourn",
+    "name": "Suffrage Sojourn",
+    "category": "Play & explore",
+    "eyebrow": "Explore the unfinished story",
+    "description": "An interactive journey through five turning points in voting rights, with primary sources and a teacher mode. Now hosted at mglearn.",
+    "url": "https://mglearn.github.io/sojourn/",
+    "image": "sojourn.webp",
+    "tags": [
+      "History",
+      "Interactive journey"
+    ],
+    "note": "New home · mglearn"
+  },
+  {
+    "repo": "ndc",
+    "name": "Difficult Conversations",
+    "category": "Learning",
+    "eyebrow": "Practice the conversation",
+    "description": "Work through coaching scenarios using the Acknowledge, Reframe, Commit framework. Make space for a more productive next conversation.",
+    "url": "https://mguhlin.github.io/ndc/",
+    "image": "conversation.webp",
+    "tags": [
+      "Coaching",
+      "Scenarios"
+    ]
+  },
+  {
+    "repo": "cudl",
+    "name": "Coaching with UDL",
+    "category": "Learning",
+    "eyebrow": "Design for every learner",
+    "description": "Coaching resources grounded in Universal Design for Learning. Explore ways to support learner variability and more inclusive instruction.",
+    "url": "https://mguhlin.github.io/creations/cudl/",
+    "image": "coaching.webp",
+    "tags": [
+      "Coaching",
+      "UDL"
+    ],
+    "note": "Now in Creations"
+  },
+  {
+    "repo": "eisa26",
+    "name": "Emotional Intelligence",
+    "category": "Learning",
+    "eyebrow": "A moment for reflection",
+    "description": "A self-assessment for reflecting on emotional intelligence across key domains. Use your profile as a starting point for personal growth.",
+    "url": "https://mguhlin.github.io/eisa26/",
+    "image": "reflection.webp",
+    "tags": [
+      "Self-reflection",
+      "Assessment"
+    ]
+  },
+  {
+    "repo": "funquiz",
+    "name": "Character Quizzes",
+    "category": "Play & explore",
+    "eyebrow": "A lighter kind of discovery",
+    "description": "Playful personality quizzes inspired by familiar fictional characters, beginning with a Winnie the Pooh educator quiz.",
+    "url": "https://mguhlin.github.io/funquiz/",
+    "image": "funquiz.webp",
+    "tags": [
+      "Personality quizzes",
+      "Just for fun"
+    ]
+  },
+  {
+    "repo": "ace",
+    "name": "ACE It",
+    "category": "Learning",
+    "eyebrow": "Design learning that connects",
+    "description": "Design assignments with Articulate, Connect, Extend checkpoints, build learning tasks, and review lesson plans and syllabi with ACE Check.",
+    "url": "https://mguhlin.github.io/ace/",
+    "image": "ace.webp",
+    "tags": [
+      "Assignments",
+      "SOLO",
+      "Assessment"
+    ]
+  },
+  {
+    "repo": "hlc",
+    "name": "History Learning Center",
+    "category": "Learning",
+    "eyebrow": "Investigate the past",
+    "description": "Daily history openers, inquiry activities, printables, problem-solving units, Event Maps, and Juneteenth resources with multilingual learning supports.",
+    "url": "https://mguhlin.github.io/hlc/",
+    "image": "hlc.webp",
+    "tags": [
+      "History",
+      "Social studies",
+      "K–12"
+    ]
+  },
+  {
+    "repo": "slc",
+    "name": "Science Learning Center",
+    "category": "Learning",
+    "eyebrow": "Notice. Investigate. Explain.",
+    "description": "Explore illustrated science challenges for grades 6–8. Compare evidence, explain your reasoning, and apply science ideas to a new situation.",
+    "url": "https://mguhlin.github.io/slc/",
+    "image": "slc.webp",
+    "tags": [
+      "Science",
+      "TEKS",
+      "Grades 6–8"
+    ]
+  },
+  {
+    "repo": "sapiqolms",
+    "name": "Sapiqo LMS",
+    "category": "Tools & collections",
+    "eyebrow": "Build a place to learn",
+    "description": "A self-hosted learning management system for courses, assignments, quizzes, forums, badges, and certificates. Explore the project and installation downloads.",
+    "url": "https://mguhlin.github.io/sapiqolms/",
+    "image": "sapiqolms.webp",
+    "tags": [
+      "LMS",
+      "Courses",
+      "Self-hosted"
+    ]
+  },
+  {
+    "repo": "splatlms",
+    "name": "SplatLMS",
+    "category": "Tools & collections",
+    "eyebrow": "Learn the SplatWorks ecosystem",
+    "description": "A self-hosted learning management system with SplatWorks Educator as its first course. Explore lessons, practice activities, quizzes, and installation downloads.",
+    "url": "https://mguhlin.github.io/splatlms/",
+    "image": "splatlms.webp",
+    "tags": [
+      "LMS",
+      "SplatWorks Educator",
+      "Professional learning"
+    ]
+  },
+  {
+    "repo": "webdecks",
+    "name": "Web Decks",
+    "category": "Tools & collections",
+    "eyebrow": "Present. Share. Teach.",
+    "description": "Build portable HTML slide decks with speaker notes, a presenter view, PDF export, and phone-friendly reading. Includes the Web Deck v5 framework, specification, and starter.",
+    "url": "https://mguhlin.github.io/webdecks/",
+    "image": "webdecks.webp",
+    "tags": [
+      "Presentations",
+      "Slides",
+      "Templates"
+    ]
+  },
+  {
+    "id": "pblwordle",
+    "repo": "mguhlin.github.io",
+    "name": "PBL Wordle",
+    "category": "Play & explore",
+    "eyebrow": "Guess a word. Connect an idea.",
+    "description": "A classroom word game for project-based learning and critical thinking. Use clues, teacher-selected vocabulary, shared pupil challenges, and discussion questions to connect each word to learning.",
+    "url": "https://mguhlin.github.io/games/pblwordle/",
+    "source_url": "https://github.com/mguhlin/mguhlin.github.io/tree/main/games/pblwordle",
+    "image": "pblwordle.webp",
+    "tags": [
+      "PBL",
+      "Wordle",
+      "Classroom game"
+    ]
+  }
 ]

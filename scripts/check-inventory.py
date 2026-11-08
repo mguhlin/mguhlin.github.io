@@ -5,6 +5,7 @@ from pathlib import Path
 import urllib.request
 import sys
 
+ROOT = Path(__file__).resolve().parents[1]
 repos = []
 page = 1
 while True:
@@ -18,8 +19,16 @@ while True:
 # Keep the owner's directory exclusion without changing the published dev site.
 excluded = {'mguhlin.github.io', 'dev'}
 active = {r['name'] for r in repos if r['has_pages'] and not r['archived'] and r['name'] not in excluded}
-curated = {p['repo'] for p in json.loads((Path(__file__).resolve().parents[1] / 'data/projects.json').read_text())}
+projects = json.loads((ROOT / 'data/projects.json').read_text())
+curated = {p['repo'] for p in projects if p['repo'] != 'mguhlin.github.io'}
+# Games published inside the root site have no separate repository to discover.
+local_games = {
+    'https://mguhlin.github.io/' + path.parent.relative_to(ROOT).as_posix() + '/'
+    for path in (ROOT / 'games').rglob('index.html')
+}
+missing_games = local_games - {p['url'] for p in projects}
 print('New published repositories:', ', '.join(sorted(active - curated)) or 'none')
 print('Entries needing review:', ', '.join(sorted(curated - active)) or 'none')
+print('Unlisted local games:', ', '.join(sorted(missing_games)) or 'none')
 print(f'{len(curated)} indexed / {len(active)} active published repositories')
-sys.exit(active != curated)
+sys.exit(active != curated or bool(missing_games))

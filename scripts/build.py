@@ -7,7 +7,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 projects = json.loads((ROOT / 'data/projects.json').read_text())
-assert len({p['repo'] for p in projects}) == len(projects), 'Duplicate repository'
+assert len({p.get('id', p['repo']) for p in projects}) == len(projects), 'Duplicate project ID'
+assert len({p['url'] for p in projects}) == len(projects), 'Duplicate project URL'
 for project in projects:
     assert project['url'].startswith('https://')
     assert (ROOT / 'assets/images' / project['image']).is_file(), project['image']
@@ -17,6 +18,7 @@ arrow = '<span aria-hidden="true">↗</span>'
 code_icon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="m8 6-6 6 6 6m8-12 6 6-6 6M14 3l-4 18"/></svg>'
 cards = []
 for i, p in enumerate(projects):
+    source_url = p.get('source_url', f"https://github.com/mguhlin/{p['repo']}")
     tags = ''.join(f'<span class="tag">{h(t)}</span>' for t in p['tags'])
     featured = '<span class="card-featured">Start here</span>' if p.get('featured') else ''
     note = f'<p class="card-note">{h(p["note"])}</p>' if p.get('note') else ''
@@ -27,7 +29,7 @@ for i, p in enumerate(projects):
       <div class="card-body"><p class="eyebrow">{h(p['eyebrow'])}</p>
         <h3><a href="{h(p['url'])}">{h(p['name'])}</a></h3>
         <p class="card-description">{h(p['description'])}</p><div class="tags">{tags}</div>{note}
-        <div class="card-footer"><a class="launch" href="{h(p['url'])}" aria-label="Open {h(p['name'])}">Explore project <span class="arrow">{arrow}</span></a><a class="source" href="https://github.com/mguhlin/{h(p['repo'])}" aria-label="{h(p['name'])} source on GitHub">{code_icon} Source</a></div>
+        <div class="card-footer"><a class="launch" href="{h(p['url'])}" aria-label="Open {h(p['name'])}">Explore project <span class="arrow">{arrow}</span></a><a class="source" href="{h(source_url)}" aria-label="{h(p['name'])} source on GitHub">{code_icon} Source</a></div>
       </div></article>''')
 filters = ''.join(f'<button type="button" data-filter="{h(c)}" aria-pressed="{str(c == "All projects").lower()}">{h(c)} <span aria-hidden="true">{n:02}</span></button>' for c,n in [('All projects',len(projects)),*counts.items()])
 html = f'''<!doctype html>

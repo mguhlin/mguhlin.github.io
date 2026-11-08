@@ -6,7 +6,9 @@ sorting, original project artwork, and a generated editorial photograph.
 
 ## Edit and preview
 
-1. Update `data/projects.json` (one card per non-archived published repository).
+1. Update `data/projects.json` (one card per non-archived published repository,
+   plus standalone projects hosted inside this site). Nested projects use a unique
+   `id` and a `source_url` pointing to their source folder.
 2. Add optimized WebP artwork to `assets/images/`.
 3. Run `python3 scripts/build.py` to regenerate the committed `index.html`.
 4. Run `python3 -m http.server 4180 --bind 127.0.0.1`.

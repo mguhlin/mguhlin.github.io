@@ -45,6 +45,13 @@ WebP. Their original project licenses and provenance continue to apply.
 | funquiz.webp | Browser capture of mguhlin.github.io/funquiz/ |
 | prototype.webp | Browser capture of mguhlin.github.io/dev/ |
 | postbox.webp | postbox/assets/hero-purple.png |
+| ace.webp | ace/assets/infographics/checkpoints-illustrated.webp |
+| hlc.webp | hlc/assets/history-daily-openers-hero.webp |
+| slc.webp | slc/assets/hero/science-learning-center.png |
+| sapiqolms.webp | sapiqolms/site/assets/hero.webp |
+| splatlms.webp | splatlms/site/assets/hero.webp |
+| webdecks.webp | webdecks/assets/hero.webp |
+| pblwordle.webp | games/pblwordle/assets/word-island.webp |
 
 The NSPA photography is illustrative, not a claim that the pictured people are
 actual participants or users of the linked resources. Card images are decorative;
