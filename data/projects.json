@@ -35,7 +35,7 @@
     "name": "SecureVCC — Secure Vibe-Coded Creations",
     "category": "Tools & collections",
     "eyebrow": "A security skill for your coding assistant",
-    "description": "Download a single Markdown skill for security audits of vibe-coded apps, websites, APIs, and tools. Check hardcoded passwords, API keys, frontend secrets, access control, database rules, injection, AI tools, dependencies, and deployment. Includes a README, original sources, and practical safeguards.",
+    "description": "Download a single Markdown skill for security audits of vibe-coded apps, websites, APIs, and tools. Check hardcoded passwords, API keys, frontend secrets, access control, database rules, injection, AI tools, dependencies, and deployment. Includes a README, original sources, and practical safeguards. Find implicit state machines and improve UX, DX, and AX with explicit transition guards, recovery, and regression checks. Covers password-reset safety, admin MFA, verified payment webhooks, idempotency, timeouts, saga compensation, permission-aware caching, pagination, notifications, dependency alerts, logs, and smoke tests.",
     "url": "https://mguhlin.github.io/creations/securevcc/",
     "source_url": "https://github.com/mguhlin/creations/tree/main/securevcc",
     "image": "securevcc.webp",
@@ -44,7 +44,11 @@
       "Vibe coding",
       "Markdown skill",
       "API keys",
-      "OWASP"
+      "OWASP",
+      "State machines",
+      "UX / DX / AX",
+      "Idempotency & recovery",
+      "Safe caching & pagination"
     ]
   },
   {
