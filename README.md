@@ -28,3 +28,7 @@ relicense their content or artwork.
 ## Postbox
 
 [Download Postbox for Windows or Linux](https://mguhlin.github.io/postbox/) — Miguel Guhlin’s portable offline email viewer for EML and MBOX exports, with search, attachment previews, and bulk organization. [README and source](https://github.com/mguhlin/postbox). Postbox is maintained and published from its own repository; its public URL and download paths are unchanged.
+
+## SecureVCC
+
+[SecureVCC — Secure Vibe-Coded Creations](https://mguhlin.github.io/creations/securevcc/) is listed in the directory and searchable by name, security audit, vibe coding, Markdown skill, passwords, API keys, and related topics. [Download the Markdown](https://mguhlin.github.io/creations/securevcc/securevcc.md) · [README and sources](https://github.com/mguhlin/creations/tree/main/securevcc).

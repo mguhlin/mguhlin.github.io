@@ -30,6 +30,24 @@
     "featured": true
   },
   {
+    "repo": "creations",
+    "id": "securevcc",
+    "name": "SecureVCC — Secure Vibe-Coded Creations",
+    "category": "Tools & collections",
+    "eyebrow": "A security skill for your coding assistant",
+    "description": "Download a single Markdown skill for security audits of vibe-coded apps, websites, APIs, and tools. Check hardcoded passwords, API keys, frontend secrets, access control, database rules, injection, AI tools, dependencies, and deployment. Includes a README, original sources, and practical safeguards.",
+    "url": "https://mguhlin.github.io/creations/securevcc/",
+    "source_url": "https://github.com/mguhlin/creations/tree/main/securevcc",
+    "image": "securevcc.webp",
+    "tags": [
+      "Security audit",
+      "Vibe coding",
+      "Markdown skill",
+      "API keys",
+      "OWASP"
+    ]
+  },
+  {
     "repo": "contraband",
     "name": "Contraband",
     "category": "Learning",
