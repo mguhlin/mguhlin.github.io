@@ -43,7 +43,7 @@ test('search and category filters combine, reset, and survive reload', async ({ 
   await expect(page.getByRole('searchbox')).toHaveValue('coaching');
   await expect(page.locator('.project-card:visible')).toHaveCount(2);
   await page.getByRole('searchbox').fill('no-match-xyz');
-  await expect(page.getByRole('heading', {name:'No projects found.'})).toBeVisible();
+  await expect(page.getByRole('heading', {name:'No projects found'})).toBeVisible();
   await expect(page.getByRole('status')).toHaveText(`0 of ${projects.length} projects`);
   await page.getByRole('button', {name:'Clear search & filters'}).click();
   await expect(page.locator('.project-card:visible')).toHaveCount(projects.length);

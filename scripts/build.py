@@ -15,7 +15,7 @@ for project in projects:
 counts = Counter(p['category'] for p in projects)
 h = escape
 arrow = '<span aria-hidden="true">↗</span>'
-code_icon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><path d="m8 6-6 6 6 6m8-12 6 6-6 6M14 3l-4 18"/></svg>'
+code_icon = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="m8 6-6 6 6 6m8-12 6 6-6 6M14 3l-4 18"/></svg>'
 cards = []
 for i, p in enumerate(projects):
     source_url = p.get('source_url', f"https://github.com/mguhlin/{p['repo']}")
@@ -31,7 +31,7 @@ for i, p in enumerate(projects):
         <p class="card-description">{h(p['description'])}</p><div class="tags">{tags}</div>{note}
         <div class="card-footer"><a class="launch" href="{h(p['url'])}" aria-label="Open {h(p['name'])}">Explore project <span class="arrow">{arrow}</span></a><a class="source" href="{h(source_url)}" aria-label="{h(p['name'])} source on GitHub">{code_icon} Source</a></div>
       </div></article>''')
-filters = ''.join(f'<button type="button" data-filter="{h(c)}" aria-pressed="{str(c == "All projects").lower()}">{h(c)} <span aria-hidden="true">{n:02}</span></button>' for c,n in [('All projects',len(projects)),*counts.items()])
+filters = ''.join(f'<button type="button" data-filter="{h(c)}" aria-pressed="{str(c == "All projects").lower()}">{h(c)} <span aria-hidden="true">{n}</span></button>' for c,n in [('All projects',len(projects)),*counts.items()])
 html = f'''<!doctype html>
 <html lang="en">
 <head>
@@ -57,20 +57,20 @@ html = f'''<!doctype html>
 <main id="main">
 <section class="hero wrap" aria-labelledby="hero-title">
   <div class="hero-layout"><div class="hero-copy"><p class="eyebrow">The creative side of Another Think Coming</p>
-    <h1 id="hero-title">Ideas made useful.<br><span>Curiosity put to work.</span></h1>
+    <h1 id="hero-title">Ideas made useful<br><span>Curiosity put to work</span></h1>
     <p class="hero-intro">Tools to make something. Resources to learn something. A few worlds to get lost in. Explore what I’m building at the intersection of education, technology, and play.</p>
     <div class="hero-actions"><a class="button" href="#projects">Explore the collection <span aria-hidden="true">↓</span></a><a class="text-link" href="https://mguhlin.org/about/">Meet Miguel <span class="arrow" aria-hidden="true">↗</span></a></div>
-  </div><figure class="hero-art"><img src="assets/images/workspace.webp" width="1500" height="1000" fetchpriority="high" alt="AI-generated photograph of a sunlit desk with a sketchbook, navy notebook, laptop, and coffee."><figcaption>From “what if?” to something you can use.</figcaption></figure></div>
+  </div><figure class="hero-art"><img src="assets/images/workspace.webp" width="1500" height="1000" fetchpriority="high" alt="AI-generated photograph of a sunlit desk with a sketchbook, navy notebook, laptop, and coffee."><figcaption>From “what if?” to something you can use</figcaption></figure></div>
   <div class="collection-meta"><div class="meta-left"><span><strong>{len(projects)} projects</strong> to explore</span><span>Tools, learning & play</span><span>By Miguel Guhlin</span></div></div>
 </section>
 <section id="projects" class="directory wrap" aria-labelledby="projects-title">
-  <div class="section-heading"><div><h2 id="projects-title">Find your next discovery.</h2><p>Pick a starting point. Follow your curiosity.</p></div><span id="result-count" class="directory-count" role="status" aria-live="polite">{len(projects)} of {len(projects)} projects</span></div>
-  <div id="directory-controls" hidden><div class="search-row"><form id="project-search" class="search-form" role="search"><label class="sr-only" for="search">Search projects</label><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><input type="search" id="search" name="q" placeholder="Search tools, topics, or a project…" autocomplete="off"></form><label class="sort-label" for="sort"><span>Sort by</span><select id="sort" aria-label="Sort by"><option value="featured">Featured first</option><option value="az">Name: A–Z</option></select></label></div><div class="filters" role="group" aria-label="Filter by category">{filters}</div></div>
+  <div class="section-heading"><div><h2 id="projects-title">Find your next discovery</h2><p>Pick a starting point. Follow your curiosity.</p></div><span id="result-count" class="directory-count" role="status" aria-live="polite">{len(projects)} of {len(projects)} projects</span></div>
+  <div id="directory-controls" hidden><div class="search-row"><form id="project-search" class="search-form" role="search"><label class="sr-only" for="search">Search projects</label><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg><input type="search" id="search" name="q" placeholder="Search projects" autocomplete="off"></form><label class="sort-label" for="sort"><span>Sort by</span><select id="sort" aria-label="Sort by"><option value="featured">Featured first</option><option value="az">Name: A–Z</option></select></label></div><div class="filters" role="group" aria-label="Filter by category">{filters}</div></div>
   <noscript><p>All projects are listed below. Search and filters are available when JavaScript is enabled.</p></noscript>
   <div id="project-grid" class="project-grid">{''.join(cards)}</div>
-  <div class="empty" id="empty-state" hidden><h3>No projects found.</h3><p>Try a different word or explore the full collection.</p><button type="button" id="clear-filters" class="button">Clear search & filters</button></div>
+  <div class="empty" id="empty-state" hidden><h3>No projects found</h3><p>Try a different word or explore the full collection.</p><button type="button" id="clear-filters" class="button">Clear search & filters</button></div>
 </section>
-<section id="about" class="about" aria-labelledby="about-title"><div class="wrap about-layout"><div><p class="eyebrow">A note from the maker</p><h2 id="about-title">Built to explore. Shared to be useful.</h2><p>I’m Miguel Guhlin—an educator, writer, and maker. These projects grow out of questions about learning, creative work, and what we can build with a little curiosity and the help of AI.</p><p>This is the front door to my active GitHub Pages projects. For the writing behind the work, visit <a href="https://mguhlin.org/">Another Think Coming</a>.</p></div><aside class="elsewhere" aria-label="More to explore"><h3>Keep exploring</h3><a href="https://mguhlin.org/"><span>Another Think Coming<small>Writing on education, AI, privacy, and practical tools</small></span>{arrow}</a><a href="https://mglearn.github.io/"><span>mglearn<small>Classroom learning resources created for TCEA</small></span>{arrow}</a><a href="https://github.com/mguhlin"><span>On GitHub<small>Source code, project notes, and the wider repository list</small></span>{arrow}</a></aside></div></section>
+<section id="about" class="about" aria-labelledby="about-title"><div class="wrap about-layout"><div><p class="eyebrow">A note from the maker</p><h2 id="about-title">Built to explore. Shared to be useful</h2><p>I’m Miguel Guhlin—an educator, writer, and maker. These projects grow out of questions about learning, creative work, and what we can build with a little curiosity and the help of AI.</p><p>This is the front door to my active GitHub Pages projects. For the writing behind the work, visit <a href="https://mguhlin.org/">Another Think Coming</a>.</p></div><aside class="elsewhere" aria-label="More to explore"><h3>Keep exploring</h3><a href="https://mguhlin.org/"><span>Another Think Coming<small>Writing on education, AI, privacy, and practical tools</small></span>{arrow}</a><a href="https://mglearn.github.io/"><span>mglearn<small>Classroom learning resources created for TCEA</small></span>{arrow}</a><a href="https://github.com/mguhlin"><span>On GitHub<small>Source code, project notes, and the wider repository list</small></span>{arrow}</a></aside></div></section>
 </main>
 <footer class="site-footer"><div class="wrap footer-inner"><div class="footer-note"><p><strong>© Miguel Guhlin · Made with curiosity.</strong></p><p>Each project has its own licensing and privacy details. This directory uses no analytics or tracking cookies. Illustrative imagery includes AI-generated photography and artwork from the projects.</p></div><div class="footer-links"><a href="https://github.com/mguhlin/mguhlin.github.io/blob/main/docs/inventory.md">About this index</a><a href="https://github.com/mguhlin/mguhlin.github.io/issues">Report a broken link</a><a href="#main">Back to top ↑</a></div></div></footer>
 </body></html>
